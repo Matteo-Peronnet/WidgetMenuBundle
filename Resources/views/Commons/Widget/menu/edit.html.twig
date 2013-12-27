@@ -1,0 +1,71 @@
+{% block body %}
+
+<div class="edit-widget">
+{% block form %}
+    <form class="ajax" update="widget-{{id}}" method="POST" action="{{path('victoire_cms_widget_edit', {'id':id, 'type':entity} )}}">
+    {{form_errors(form)}}
+    {{form_row(form.name)}}
+    <ul class="menu-widget" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}">
+        {% block collection_rows %}
+        {% spaceless %}
+            {{ _self.render_widget(form) }}
+        {% endspaceless %}
+        {% endblock collection_rows %}
+    </ul>
+    {{form_widget(form._token)}}
+    {% block submit %}
+    <input class="btn btn-success" type="submit" value="{{ 'ok'|trans|desc('Ok') }}" />
+    <a class="btn" class="cancel" onclick="cancelWidgetEdition({{id}}, '{{path('victoire_cms_widget_show', {'id':id} )}}');">{{ 'cancel'|trans|desc('Annuler') }}</a>
+    {% endblock submit %}
+    </form>
+{% endblock form %}
+</div>
+
+{% endblock body %}
+
+{% macro render_widget(form, depth = 0) %}
+<ul class="menu-item" id="menu-{{depth}}">
+    <li>
+    {% if depth != 0 %}
+        {{ form_row(form.title) }}
+        {{ form_row(form.linkType) }}
+        {{ form_row(form.url) }}
+    {% endif %}
+    {% if form.items is defined  and form.items|length > 0 %}
+        {% for child in form.items %}
+            {{ _self.render_widget(child, depth + 1) }}
+        {% endfor %}
+    {% endif %}
+        {{form_errors(form)}}
+    </li>
+    <a href="#" onClick="addRow(this);return false;" class="add_menu_link"><b>+</b></a>
+</ul>
+{% endmacro %}
+
+{% block javascripts %}
+
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+    menus = new Array();
+
+    initMenus($('#menu-0'));
+    console.log(menus);
+
+    prototype = $('ul.menu-widget').attr('data-prototype')
+        + '<ul id="menu-__menu_id__"><a href="#" onClick="addRow(this);return false;" class="add_menu_link"><b>+</b></a></ul>'
+});
+function initMenus(el, parent){
+    var menu = new Menu(el.children('li'));
+    menu.item = menu.item - 1;
+    if (parent) {
+        menu.parent = parent;
+    }
+
+    if (el.children('li').children('.menu-item').length > 0) {
+        initMenus(el.children('li').children('.menu-item'), menu);
+    }
+}
+
+</script>
+{% endblock %}
