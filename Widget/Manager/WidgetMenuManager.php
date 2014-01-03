@@ -44,8 +44,10 @@ protected $container;
      *
      * @return widget show
      */
-    public function render($widget)
+    public function render(Widget $widget)
     {
+        error_log('render menu ' . $widget->getId());
+
         return $this->container->get('victoire_templating')->render(
             "VictoireMenuBundle:Widget:menu/show.html.twig",
             array(
@@ -197,7 +199,6 @@ protected $container;
      */
     public function edit(Widget $widget, $entity = null, $manager)
     {
-
         $request = $this->container->get('request');
         $classes = $this->container->get('victoire_cms.annotation_reader')->getBusinessClassesForWidget($widget);
 
@@ -220,6 +221,7 @@ protected $container;
             if ($form->isValid()) {
                 $em = $this->container->get('doctrine')->getManager();
                 $menus = $this->parseChildren($menus, $em, $widget);
+
                 foreach ($legacyChildren as $child) {
                     $em->remove($child);
                 }
@@ -257,15 +259,15 @@ protected $container;
                 $menu->setUrl($child['url']);
 
                 if ($menuItem !== null) {
-                    $menu->setParent($menuItem);
-                    $em->persist($menu);
+                    $menuItem->addChild($menu);
                 } else {
                     $menu->setWidgetMenu($widget);
-                    $em->persist($menu);
                     $menus[] = $menu;
                 }
+                $em->persist($menu);
 
                 if (isset($child['items'])) {
+                    error_log('recursive');
                     $menus = array_merge($this->parseChildren($child['items'], $em, $widget, $menu), $menus);
                 }
             }

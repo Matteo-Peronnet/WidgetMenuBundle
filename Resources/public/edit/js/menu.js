@@ -22,6 +22,7 @@ function deleteRow(el){
 }
 
 function Menu(el)  {
+    console.log(el);
     this.el = el;
     this.parentId = parseInt($(el).parents('ul').attr('id').replace('menu-', ''));
 
@@ -34,7 +35,6 @@ function Menu(el)  {
         }
     }
     this.id = cnt + 1;
-    console.log(this.id);
     menus[this.id] = this;
     this.parent = menus[this.parentId];
 };
@@ -52,7 +52,7 @@ Menu.prototype.init = function()
         }
         currentMenu = currentMenu.parent;
     } while (currentMenu != null && i < 10);
-    console.log(name);
+
     var newForm = prototype.replace(/\[__name__\]/g, name);
     newForm = newForm.replace(/__name__/g, name.replace('][', '_').replace('[', '').replace(']', ''));
     this.newForm = newForm.replace(/__menu_id__/g, this.id);

@@ -98,7 +98,7 @@ class MenuItem  implements NodeInterface
 
     /**
      * @Gedmo\TreeParent
-     * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
@@ -441,6 +441,13 @@ class MenuItem  implements NodeInterface
     public function removeChild(MenuItem $child)
     {
         $this->children->removeElement($child);
+    }
+
+    public function setChildren($children)
+    {
+        $this->children = $children;
+
+        return $this;
     }
 
     /**

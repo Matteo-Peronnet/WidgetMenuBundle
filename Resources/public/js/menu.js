@@ -22,8 +22,8 @@
      * ========================= */
     var toggle = '[data-toggle="dropdown"]'
     , Dropdown = function ( element ) {
-        var $el = $(element).on('click.dropdown.data-api', this.toggle)
-        $('html').on('click.dropdown.data-api', function () {
+        var $el = $(element).on('hover.dropdown.data-api', this.toggle)
+        $('html').on('hover.dropdown.data-api', function () {
             $el.parent().removeClass('open')
         })
     }
@@ -34,10 +34,9 @@
             , selector = $this.attr('data-target')
             , $parent
             , isActive
-
             if (!selector) {
                 selector = $this.attr('href')
-                selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+                // selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
             }
 
             $parent = $(selector)
@@ -66,21 +65,23 @@
     /* APPLY TO STANDARD DROPDOWN ELEMENTS
      * =================================== */
     $(function () {
-        $('html').on('click.dropdown.data-api', clearMenus)
-        $('body').on('click.dropdown.data-api', toggle, Dropdown.prototype.toggle)
+        $('html').on('hover.dropdown.data-api', clearMenus)
+        $('body').on('hover.dropdown.data-api', toggle, Dropdown.prototype.toggle)
     })
 }( window.jQuery );
+function initSubMenu() {
+
+    $('.submenu').hover(function (e) {
+        $(this).children('ul').removeClass('submenu-hide').addClass('submenu-show');
+        // e.preventDefault();
+        // return false;
+    }, function (e) {
+        $(this).children('ul').removeClass('.submenu-show').addClass('submenu-hide');
+        // e.preventDefault();
+        // return false;
+    }).find("a:first").append(" &raquo; ");
+}
 
 $(window).load(function(){
-    $('.submenu').hover(function (e) {
-        console.log('hover show');
-        $(this).children('ul').removeClass('submenu-hide').addClass('submenu-show');
-        e.preventDefault();
-        return false;
-    }, function (e) {
-        console.log('hover hide');
-        $(this).children('ul').removeClass('.submenu-show').addClass('submenu-hide');
-        e.preventDefault();
-        return false;
-    }).find("a:first").append(" &raquo; ");
+    initSubMenu();
 });
