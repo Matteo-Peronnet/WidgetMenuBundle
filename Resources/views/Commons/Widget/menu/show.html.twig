@@ -52,9 +52,9 @@
 
 {% macro render_dropdown_link(item, depth) %}
 {% if item.url %}
-        <a data-toggle="dropdown" class="dropdown-toggle" href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
+        <a href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
 {% elseif item.page %}
-        <a data-toggle="dropdown" class="dropdown-toggle" href="{{item.page.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
+        <a href="{{item.page.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
 {% endif %}
 {% endmacro %}
 
