@@ -4,8 +4,7 @@
 {% block form %}
     <form method="POST" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'menu', 'entity': entity} )}}">
 
-    {{form_row(form.name)}}
-    <ul class="menus" data-prototype="{{_self.widget_prototype(form.items)|e }}">
+    <ul class="menus" data-prototype="{{_self.widget_prototype(form.items.vars.prototype)|e }}">
         <li>
             {{ form_errors(form) }}
             {{ form_row(form.name) }}
@@ -29,7 +28,7 @@
 
 <script type="text/javascript">
 
-jQuery(document).ready(function() {
+$(document).ready(function() {
     menus = new Array();
     prototype = $('ul.menus').attr('data-prototype');
 });
@@ -38,8 +37,7 @@ jQuery(document).ready(function() {
 {% endblock %}
 {% endblock body %}
 
-{% macro widget_prototype(widget) %}
-    {% set form = widget.vars.prototype %}
+{% macro widget_prototype(form) %}
 
         {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
         {{ form_widget(form.linkType) }}

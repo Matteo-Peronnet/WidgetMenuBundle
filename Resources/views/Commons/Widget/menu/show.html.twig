@@ -7,7 +7,6 @@
   \_/ \_/ \_/ \_/ \_/ \_/ \_/
 
 #}
-
 <div class="widget" id="widget-{{widget.id}}">
 {% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
 
@@ -31,14 +30,38 @@
     {% for item in widget.children %}
         {% if item.children|length > 0 %}
             <li class="dropdown {% if depth > 0 %}submenu{% endif %}">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
+                {{ _self.render_dropdown_link(item, depth) }}
                 <ul class="dropdown-menu {% if depth > 0 %}submenu-show submenu-hide{% endif %}">
                     {{_self.render_children(item, depth + 1)}}
                 </ul>
+            </li>
         {% else %}
-            <li><a href="{{item.url}}">{{item.title}}</a></li>
+            {{ _self.render_link(item) }}
         {% endif %}
 
     {% endfor %}
 
 {% endmacro %}
+{% macro render_link(item) %}
+{% if item.url %}
+            <li><a href="{{item.url}}">{{item.title}}</a></li>
+{% elseif item.page %}
+            <li><a href="{{item.page.url}}">{{item.title}}</a></li>
+{% endif %}
+{% endmacro %}
+
+{% macro render_dropdown_link(item, depth) %}
+{% if item.url %}
+        <a data-toggle="dropdown" class="dropdown-toggle" href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
+{% elseif item.page %}
+        <a data-toggle="dropdown" class="dropdown-toggle" href="{{item.page.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
+{% endif %}
+{% endmacro %}
+
+{% if app.request.isXmlHttpRequest %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        initSubMenu();
+    });
+</script>
+{% endif %}
