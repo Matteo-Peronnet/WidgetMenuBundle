@@ -46,8 +46,6 @@ protected $container;
      */
     public function render(Widget $widget)
     {
-        error_log('render menu ' . $widget->getId());
-
         return $this->container->get('victoire_templating')->render(
             "VictoireMenuBundle:Widget:menu/show.html.twig",
             array(
@@ -59,7 +57,7 @@ protected $container;
     /**
      * render WidgetMenu form
      * @param Form           $form
-     * @param WidgetMenu $widget
+     * @param WidgetMenu     $widget
      * @param BusinessEntity $entity
      * @return form
      */
@@ -80,8 +78,8 @@ protected $container;
     /**
      * create a form with given widget
      * @param WidgetMenu $widget
-     * @param string         $entityName
-     * @param string         $namespace
+     * @param string     $entityName
+     * @param string     $namespace
      * @return $form
      */
     public function buildForm($widget, $entityName = null, $namespace = null)
@@ -93,11 +91,11 @@ protected $container;
 
     /**
      * create form new for WidgetMenu
-     * @param Form           $form
+     * @param Form       $form
      * @param WidgetMenu $widget
-     * @param string         $slot
-     * @param Page           $page
-     * @param string         $entity
+     * @param string     $slot
+     * @param Page       $page
+     * @param string     $entity
      *
      * @return new form
      */
@@ -120,10 +118,11 @@ protected $container;
 
     /**
      * create a widget
-     * @param string $type
-     * @param string $slot
-     * @param Page   $page
-     * @param string $entity
+     * @param string  $type
+     * @param string  $slot
+     * @param Page    $page
+     * @param string  $entity
+     * @param Manager $manager
      * @return template
      */
     public function createWidget($type, $slot, BasePage $page, $entity, $manager)
