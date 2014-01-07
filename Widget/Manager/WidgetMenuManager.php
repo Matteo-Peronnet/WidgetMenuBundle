@@ -152,7 +152,7 @@ protected $container;
 
             if ($form->isValid()) {
                 $widget = $form->getData();
-                $widget->setBusinessEntitiesName($entity);
+                $widget->setBusinessEntityName($entity);
 
                 $menus = $this->parseChildren($menus, $em, $widget);
                 $widget->setChildren($menus);
@@ -266,7 +266,6 @@ protected $container;
                 $em->persist($menu);
 
                 if (isset($child['items'])) {
-                    error_log('recursive');
                     $menus = array_merge($this->parseChildren($child['items'], $em, $widget, $menu), $menus);
                 }
             }
