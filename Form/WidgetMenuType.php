@@ -47,8 +47,9 @@ class WidgetMenuType extends WidgetType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\MenuBundle\Entity\WidgetMenu',
-            'widget' => 'menu',
+            'data_class'         => 'Victoire\MenuBundle\Entity\WidgetMenu',
+            'widget'             => 'menu',
+            'translation_domain' => 'victoire'
         ));
     }
 

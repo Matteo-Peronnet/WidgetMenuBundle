@@ -3,6 +3,7 @@ namespace Victoire\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\CmsBundle\Entity\Widget;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * WidgetMenu
@@ -20,6 +21,14 @@ class WidgetMenu extends Widget
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"}, separator="-", updatable=false)
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu")
@@ -77,6 +86,7 @@ class WidgetMenu extends Widget
     {
         return $this->children;
     }
+
     /**
      * Set name
      *
@@ -98,5 +108,28 @@ class WidgetMenu extends Widget
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return MenuItem
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

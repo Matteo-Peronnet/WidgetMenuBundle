@@ -86,8 +86,9 @@ class MenuType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\MenuBundle\Entity\MenuItem',
-            'cascade_validation' => true
+            'data_class'         => 'Victoire\MenuBundle\Entity\MenuItem',
+            'cascade_validation' => true,
+            'translation_domain' => 'victoire'
         ));
     }
 
