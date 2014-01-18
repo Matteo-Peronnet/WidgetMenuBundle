@@ -46,7 +46,7 @@ class MenuType extends AbstractType
                 'label'       => 'menu.form.page.label',
                 'required'    => false,
                 'empty_value' => 'menu.form.page.blank',
-                'class'       => 'VictoireCmsBundle:Page',
+                'class'       => 'VictoirePageBundle:Page',
                 'property'    => 'title',
                 'attr'        => array('class' => 'page-type'),
             ))

@@ -5,7 +5,7 @@ namespace Victoire\MenuBundle\Widget\Manager;
 
 use Victoire\MenuBundle\Form\WidgetMenuType;
 use Victoire\MenuBundle\Entity\WidgetMenu;
-use Victoire\CmsBundle\Entity\BasePage;
+use Victoire\PageBundle\Entity\BasePage;
 use Victoire\MenuBundle\Entity\MenuItem;
 use Victoire\CmsBundle\Entity\Widget;
 
@@ -47,7 +47,7 @@ protected $container;
     public function render(Widget $widget)
     {
         return $this->container->get('victoire_templating')->render(
-            "VictoireMenuBundle:Widget:menu/show.html.twig",
+            "VictoireMenuBundle::show.html.twig",
             array(
                 "widget" => $widget
             )
@@ -65,7 +65,7 @@ protected $container;
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireMenuBundle:Widget:menu/edit.html.twig",
+            "VictoireMenuBundle::edit.html.twig",
             array(
                 "widget" => $widget,
                 'form'   => $form->createView(),
@@ -103,7 +103,7 @@ protected $container;
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireMenuBundle:Widget:menu/new.html.twig",
+            "VictoireMenuBundle::new.html.twig",
             array(
                 "widget"          => $widget,
                 'form'            => $form->createView(),
@@ -252,7 +252,7 @@ protected $container;
                 $menu->setTitle($child['title']);
                 $menu->setlinkType($child['linkType']);
                 if (!empty($child['page'])) {
-                    $page = $em->getRepository('VictoireCmsBundle:BasePage')->findOneById($child['page']);
+                    $page = $em->getRepository('VictoirePageBundle:BasePage')->findOneById($child['page']);
                     $menu->setPage($page);
                 }
                 $menu->setUrl($child['url']);
