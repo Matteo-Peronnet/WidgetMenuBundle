@@ -172,7 +172,10 @@ protected $container;
 
                 $em->flush();
 
-                return $manager->render($widget, $page);
+                return json_encode(array(
+                    "success" => true,
+                    "html"    => $this->render($widget, $page)
+                ));
             }
 
         }
@@ -180,13 +183,16 @@ protected $container;
 
         $forms = $this->renderNewWidgetForms($entity, $slot, $page, $widget);
 
-        return $this->container->get('victoire_templating')->render(
-            "VictoireCmsBundle:Widget:new.html.twig",
-            array(
-                'classes' => $classes,
-                'forms'   => $forms
+        return json_encode(array(
+            "success" => false,
+            "html"    => $this->container->get('victoire_templating')->render(
+                "VictoireCmsBundle:Widget:Form/new.html.twig",
+                array(
+                    'classes' => $classes,
+                    'forms'   => $forms
+                )
             )
-        );
+        ));
     }
 
     /**
@@ -229,20 +235,30 @@ protected $container;
                 $em->persist($widget);
                 $em->flush();
 
-                return $manager->render($widget);
+                return json_encode(array(
+                    "success"  => true,
+                    "html"     => $this->render($widget),
+                    "widgetId" => "vic-widget-".$widget->getId()."-container"
+                ));
             }
         }
         $forms = $manager->renderWidgetForms($widget);
 
-        return $this->container->get('victoire_templating')->render(
-            "VictoireCmsBundle:Widget:edit.html.twig",
+        return json_encode(
             array(
-                'classes' => $classes,
-                'forms'   => $forms,
-                'widget'  => $widget
+                "success"  => false,
+                "html"     => $this->container->get('victoire_templating')->render(
+                    "VictoireCmsBundle:Widget:Form/edit.html.twig",
+                    array(
+                        'classes' => $classes,
+                        'forms'   => $forms,
+                        'widget'  => $widget
+                    )
+                )
             )
         );
     }
+
     private function parseChildren($data, $em, $widget, $menuItem = null)
     {
         $menus = array();

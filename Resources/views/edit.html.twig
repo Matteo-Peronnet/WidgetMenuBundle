@@ -4,27 +4,16 @@
 
 <div class="edit-widget">
 {% block form %}
-    <form class="ajax" update="widget-{{id}}" method="POST" action="{{path('victoire_cms_widget_edit', {'id':id, 'type':entity} )}}">
     {{form_errors(form)}}
     {{form_row(form.name)}}
     <ul class="menu-widget" data-prototype="{{_self.widget_prototype(form.items.vars.prototype)|e }}">
-
-
-            {{_self.render_widget(form) }}
-
+        {{_self.render_widget(form) }}
     </ul>
     {{form_widget(form._token)}}
-    {% block submit %}
-    <input class="btn btn-success" type="submit" value="{{ 'ok'|trans|desc('Ok') }}" />
-    <a class="btn" class="cancel" onclick="cancelWidgetEdition({{id}}, '{{path('victoire_cms_widget_show', {'id':id} )}}');">{{ 'cancel'|trans|desc('Annuler') }}</a>
-    {% endblock submit %}
-    </form>
 {% endblock form %}
 </div>
 
 {% endblock body %}
-
-
 
 {% block javascripts %}
 <script type="text/javascript">
@@ -34,6 +23,7 @@ $(document).ready(function() {
     prototype = $('ul.menu-widget').attr('data-prototype');
     initMenus($('#menu-0'));
 });
+
 function initMenus(el, parent){
     el.children('li').each(function() {
         var menu = new Menu($(this));
