@@ -36,6 +36,17 @@ class WidgetMenu extends Widget
     private $children;
 
     /**
+     * To String function
+     * Used in render choices type (Especially VictoireWidgetRenderBundle)
+     *
+     * @return String
+     */
+    public function __toString()
+    {
+        return '#'.$this->getId().' - '.$this->getName();
+    }
+
+    /**
      * Add child
      *
      * @param string $child

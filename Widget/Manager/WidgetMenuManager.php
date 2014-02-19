@@ -235,25 +235,23 @@ protected $container;
                 $em->persist($widget);
                 $em->flush();
 
-                return json_encode(array(
+                return array(
                     "success"  => true,
                     "html"     => $this->render($widget),
                     "widgetId" => "vic-widget-".$widget->getId()."-container"
-                ));
+                );
             }
         }
         $forms = $manager->renderWidgetForms($widget);
 
-        return json_encode(
-            array(
-                "success"  => false,
-                "html"     => $this->container->get('victoire_templating')->render(
-                    "VictoireCmsBundle:Widget:Form/edit.html.twig",
-                    array(
-                        'classes' => $classes,
-                        'forms'   => $forms,
-                        'widget'  => $widget
-                    )
+        return array(
+            "success"  => false,
+            "html"     => $this->container->get('victoire_templating')->render(
+                "VictoireCmsBundle:Widget:Form/edit.html.twig",
+                array(
+                    'classes' => $classes,
+                    'forms'   => $forms,
+                    'widget'  => $widget
                 )
             )
         );

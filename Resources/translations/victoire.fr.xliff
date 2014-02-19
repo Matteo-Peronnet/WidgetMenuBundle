@@ -10,6 +10,34 @@
         <source>widget.menu.new.action.label</source>
         <target>Menu</target>
       </trans-unit>
+      <trans-unit resname="modal.form.widget.type.menu.label">
+        <source>modal.form.widget.type.menu.label</source>
+        <target>Paramètres du menu</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.name.label">
+        <source>menu.form.name.label</source>
+        <target>Nom du menu</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.title.label">
+        <source>menu.form.title.label</source>
+        <target>Intitulé</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.link_type.page">
+        <source>menu.form.link_type.page</source>
+        <target>Type page</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.link_type.url">
+        <source>menu.form.link_type.url</source>
+        <target>Url</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.page.label">
+        <source>menu.form.page.label</source>
+        <target>Page</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.page.blank">
+        <source>menu.form.page.blank</source>
+        <target>Choisissez une page</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -36,11 +36,11 @@ class MenuType extends AbstractType
                 'choices'     => array(
                     'page'  => 'menu.form.link_type.page',
                     'url'   => 'menu.form.link_type.url'
-                    ),
+                ),
                 'attr'        => array(
                     'class' => 'item-type',
                     'onchange' => 'trackChange(this);'
-                    ),
+                )
             ))
             ->add('page', 'entity', array(
                 'label'       => 'menu.form.page.label',

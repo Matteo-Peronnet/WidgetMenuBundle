@@ -23,8 +23,10 @@ class WidgetMenuType extends WidgetType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-
+            ->add('name', null, array(
+                'label'    => 'menu.form.name.label',
+                'required' => true,
+            ))
             ->add('items', 'collection',
                 array(
                     'property_path' => 'children',
