@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2013-11-27T18:15:06Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="7c274dc63876be15e5bbafb68070ccf04ba9910b" resname="widget.menu.new.action.label">
+        <source>widget.menu.new.action.label</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit resname="modal.form.widget.type.menu.label">
+        <source>modal.form.widget.type.menu.label</source>
+        <target>Paramètres du menu</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.name.label">
+        <source>menu.form.name.label</source>
+        <target>Nom du menu</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.title.label">
+        <source>menu.form.title.label</source>
+        <target>Intitulé</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.link_type.page">
+        <source>menu.form.link_type.page</source>
+        <target>Type page</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.link_type.url">
+        <source>menu.form.link_type.url</source>
+        <target>Url</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.page.label">
+        <source>menu.form.page.label</source>
+        <target>Page</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.page.blank">
+        <source>menu.form.page.blank</source>
+        <target>Choisissez une page</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

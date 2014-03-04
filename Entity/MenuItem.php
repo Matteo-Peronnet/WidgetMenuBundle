@@ -3,7 +3,7 @@ namespace Victoire\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\CmsBundle\Entity\Widget;
-use Victoire\CmsBundle\Entity\BasePage;
+use Victoire\PageBundle\Entity\BasePage;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\Menu\NodeInterface;
 use Victoire\CmsBundle\Annotations as VIC;
@@ -67,7 +67,7 @@ class MenuItem  implements NodeInterface
     private $widgetMenu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Victoire\CmsBundle\Entity\BasePage")
+     * @ORM\ManyToOne(targetEntity="Victoire\PageBundle\Entity\BasePage")
      * @ORM\JoinColumn(name="attached_page_id", referencedColumnName="id", onDelete="cascade", nullable=true)
      */
     private $page;
@@ -112,7 +112,7 @@ class MenuItem  implements NodeInterface
     /**
      * @var boolean
      *
-     * @ORM\ManyToOne(targetEntity="Victoire\CmsBundle\Entity\BasePage")
+     * @ORM\ManyToOne(targetEntity="Victoire\PageBundle\Entity\BasePage")
      * @ORM\JoinColumn(name="root_hierarchy_page", referencedColumnName="id", onDelete="cascade", nullable=true)
      */
     private $rootHierarchyPage;

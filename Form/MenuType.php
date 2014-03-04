@@ -36,17 +36,17 @@ class MenuType extends AbstractType
                 'choices'     => array(
                     'page'  => 'menu.form.link_type.page',
                     'url'   => 'menu.form.link_type.url'
-                    ),
+                ),
                 'attr'        => array(
                     'class' => 'item-type',
                     'onchange' => 'trackChange(this);'
-                    ),
+                )
             ))
             ->add('page', 'entity', array(
                 'label'       => 'menu.form.page.label',
                 'required'    => false,
                 'empty_value' => 'menu.form.page.blank',
-                'class'       => 'VictoireCmsBundle:Page',
+                'class'       => 'VictoirePageBundle:Page',
                 'property'    => 'title',
                 'attr'        => array('class' => 'page-type'),
             ))
@@ -86,8 +86,9 @@ class MenuType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\MenuBundle\Entity\MenuItem',
-            'cascade_validation' => true
+            'data_class'         => 'Victoire\MenuBundle\Entity\MenuItem',
+            'cascade_validation' => true,
+            'translation_domain' => 'victoire'
         ));
     }
 

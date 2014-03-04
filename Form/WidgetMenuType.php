@@ -23,8 +23,10 @@ class WidgetMenuType extends WidgetType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-
+            ->add('name', null, array(
+                'label'    => 'menu.form.name.label',
+                'required' => true,
+            ))
             ->add('items', 'collection',
                 array(
                     'property_path' => 'children',
@@ -47,8 +49,9 @@ class WidgetMenuType extends WidgetType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Victoire\MenuBundle\Entity\WidgetMenu',
-            'widget' => 'menu',
+            'data_class'         => 'Victoire\MenuBundle\Entity\WidgetMenu',
+            'widget'             => 'menu',
+            'translation_domain' => 'victoire'
         ));
     }
 

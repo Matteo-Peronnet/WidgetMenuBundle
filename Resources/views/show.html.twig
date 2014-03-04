@@ -1,31 +1,40 @@
 {% block body %}
 
 {#
-   _   _   _   _   _   _   _
-  / \ / \ / \ / \ / \ / \ / \
- ( C ) o ) m ) m ) o ) n ) s )
-  \_/ \_/ \_/ \_/ \_/ \_/ \_/
+   _   _   _   _   _   _   _   _   _
+  / \ / \ / \ / \ / \ / \ / \ / \ / \
+ ( b ) o ) o ) t ) s ) t ) r ) a ) p )
+  \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/
 
 #}
-<div class="widget" id="widget-{{widget.id}}">
+
+<div class="vic-widget vic-widget-menu" id="widget-{{widget.id}}">
 {% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
 
 {% block content %}
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <div class="nav-collapse">
-                <ul class="nav">
-                    {{ _self.render_children(widget) }}
-                </ul>
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        {{ _self.render_children(widget) }}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}
 </div>
+{% if app.request.isXmlHttpRequest %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        initSubMenu();
+    });
+</script>
+{% endif %}
 
 {% endblock body %}
+
 {% macro render_children(widget, depth = 0) %}
     {% for item in widget.children %}
         {% if item.children|length > 0 %}
@@ -58,10 +67,3 @@
 {% endif %}
 {% endmacro %}
 
-{% if app.request.isXmlHttpRequest %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        initSubMenu();
-    });
-</script>
-{% endif %}

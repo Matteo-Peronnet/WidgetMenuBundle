@@ -5,7 +5,7 @@ namespace Victoire\MenuBundle\Widget\Manager;
 
 use Victoire\MenuBundle\Form\WidgetMenuType;
 use Victoire\MenuBundle\Entity\WidgetMenu;
-use Victoire\CmsBundle\Entity\BasePage;
+use Victoire\PageBundle\Entity\BasePage;
 use Victoire\MenuBundle\Entity\MenuItem;
 use Victoire\CmsBundle\Entity\Widget;
 
@@ -47,7 +47,7 @@ protected $container;
     public function render(Widget $widget)
     {
         return $this->container->get('victoire_templating')->render(
-            "VictoireMenuBundle:Widget:menu/show.html.twig",
+            "VictoireMenuBundle::show.html.twig",
             array(
                 "widget" => $widget
             )
@@ -65,7 +65,7 @@ protected $container;
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireMenuBundle:Widget:menu/edit.html.twig",
+            "VictoireMenuBundle::edit.html.twig",
             array(
                 "widget" => $widget,
                 'form'   => $form->createView(),
@@ -103,7 +103,7 @@ protected $container;
     {
 
         return $this->container->get('victoire_templating')->render(
-            "VictoireMenuBundle:Widget:menu/new.html.twig",
+            "VictoireMenuBundle::new.html.twig",
             array(
                 "widget"          => $widget,
                 'form'            => $form->createView(),
@@ -152,7 +152,7 @@ protected $container;
 
             if ($form->isValid()) {
                 $widget = $form->getData();
-                $widget->setBusinessEntitiesName($entity);
+                $widget->setBusinessEntityName($entity);
 
                 $menus = $this->parseChildren($menus, $em, $widget);
                 $widget->setChildren($menus);
@@ -172,7 +172,10 @@ protected $container;
 
                 $em->flush();
 
-                return $manager->render($widget, $page);
+                return json_encode(array(
+                    "success" => true,
+                    "html"    => $this->render($widget, $page)
+                ));
             }
 
         }
@@ -180,13 +183,16 @@ protected $container;
 
         $forms = $this->renderNewWidgetForms($entity, $slot, $page, $widget);
 
-        return $this->container->get('victoire_templating')->render(
-            "VictoireCmsBundle:Widget:new.html.twig",
-            array(
-                'classes' => $classes,
-                'forms'   => $forms
+        return json_encode(array(
+            "success" => false,
+            "html"    => $this->container->get('victoire_templating')->render(
+                "VictoireCmsBundle:Widget:Form/new.html.twig",
+                array(
+                    'classes' => $classes,
+                    'forms'   => $forms
+                )
             )
-        );
+        ));
     }
 
     /**
@@ -229,20 +235,28 @@ protected $container;
                 $em->persist($widget);
                 $em->flush();
 
-                return $manager->render($widget);
+                return array(
+                    "success"  => true,
+                    "html"     => $this->render($widget),
+                    "widgetId" => "vic-widget-".$widget->getId()."-container"
+                );
             }
         }
         $forms = $manager->renderWidgetForms($widget);
 
-        return $this->container->get('victoire_templating')->render(
-            "VictoireCmsBundle:Widget:edit.html.twig",
-            array(
-                'classes' => $classes,
-                'forms'   => $forms,
-                'widget'  => $widget
+        return array(
+            "success"  => false,
+            "html"     => $this->container->get('victoire_templating')->render(
+                "VictoireCmsBundle:Widget:Form/edit.html.twig",
+                array(
+                    'classes' => $classes,
+                    'forms'   => $forms,
+                    'widget'  => $widget
+                )
             )
         );
     }
+
     private function parseChildren($data, $em, $widget, $menuItem = null)
     {
         $menus = array();
@@ -252,7 +266,7 @@ protected $container;
                 $menu->setTitle($child['title']);
                 $menu->setlinkType($child['linkType']);
                 if (!empty($child['page'])) {
-                    $page = $em->getRepository('VictoireCmsBundle:BasePage')->findOneById($child['page']);
+                    $page = $em->getRepository('VictoirePageBundle:BasePage')->findOneById($child['page']);
                     $menu->setPage($page);
                 }
                 $menu->setUrl($child['url']);
@@ -266,7 +280,6 @@ protected $container;
                 $em->persist($menu);
 
                 if (isset($child['items'])) {
-                    error_log('recursive');
                     $menus = array_merge($this->parseChildren($child['items'], $em, $widget, $menu), $menus);
                 }
             }

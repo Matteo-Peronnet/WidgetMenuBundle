@@ -22,7 +22,6 @@ function deleteRow(el){
 }
 
 function Menu(el)  {
-    console.log(el);
     this.el = el;
     this.parentId = parseInt($(el).parents('ul').attr('id').replace('menu-', ''));
 

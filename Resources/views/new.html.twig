@@ -1,26 +1,21 @@
+{% extends 'VictoireCmsBundle:Widget:new.html.twig' %}
 {% block body %}
 
 <div id="widget-{{slot}}" class="add-widget">
 {% block form %}
-    <form method="POST" action="{{path('victoire_cms_widget_create', {'page': page.id,'slot':slot, 'type':'menu', 'entity': entity} )}}">
 
     <ul class="menus" data-prototype="{{_self.widget_prototype(form.items.vars.prototype)|e }}">
         <li>
             {{ form_errors(form) }}
             {{ form_row(form.name) }}
             <ul id="menu-0">
-                <a href="#" onClick="addRow(this);return false;" class="add_menu_link"><b>+</b></a>
+                <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
             </ul>
         </li>
     </ul>
     {{form_errors(form)}}
     {{form_rest(form)}}
 
-{% block submit %}
-    <input type="submit" value="{{ 'ok'|trans|desc('Ok') }}" />
-    <a class="btn" class="cancel" onclick="cancelWidget(this);">{{ 'cancel'|trans|desc('Annuler') }}</a>
-{% endblock submit %}
-    </form>
 {% endblock form %}
 </div>
 
@@ -43,12 +38,12 @@ $(document).ready(function() {
         {{ form_widget(form.linkType) }}
         <span class="page-type">{{ form_widget(form.page) }}</span>
         <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
-        <span><a href="#" onClick="addSubRow(this, __menu_id__);return false;" class="add_menu_link"><b>+</b></a></span>
-        <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="icon icon-trash"></i></a></span>
+        <span><a href="#" onClick="addSubRow(this, __menu_id__);return false;" class="add_menu_link"></a></span>
+        <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
         {{ form_rest(form) }}
 
         <ul style="display: none;" id="menu-__menu_id__">
-            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"><b>+</b></a>
+            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
         </ul>
 
 {% endmacro %}
