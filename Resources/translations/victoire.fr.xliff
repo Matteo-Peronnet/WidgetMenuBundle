@@ -38,6 +38,18 @@
         <source>menu.form.page.blank</source>
         <target>Choisissez une page</target>
       </trans-unit>
+      <trans-unit resname="menu.form.childrenLayout.label">
+        <source>menu.form.childrenLayout.label</source>
+        <target>Affichage du second niveau</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.childrenLayout.choices.rollover.label">
+        <source>menu.form.childrenLayout.choices.rollover.label</source>
+        <target>Rollover</target>
+      </trans-unit>
+      <trans-unit resname="menu.form.childrenLayout.choices.panel.label">
+        <source>menu.form.childrenLayout.choices.panel.label</source>
+        <target>Menu déroulant</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

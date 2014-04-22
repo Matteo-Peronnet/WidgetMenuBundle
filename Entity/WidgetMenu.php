@@ -1,4 +1,5 @@
 <?php
+
 namespace Victoire\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -34,6 +35,13 @@ class WidgetMenu extends Widget
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu")
      */
     private $children;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="children_layout", type="string", length=255)
+     */
+    private $childrenLayout = "dropdown";
 
     /**
      * To String function
@@ -142,5 +150,27 @@ class WidgetMenu extends Widget
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Get childrenLayout
+     *
+     * @return string
+     */
+    public function getChildrenLayout()
+    {
+        return $this->childrenLayout;
+    }
+
+    /**
+     * Set childrenLayout
+     *
+     * @param string $childrenLayout
+     * @return $this
+     */
+    public function setChildrenLayout($childrenLayout)
+    {
+        $this->childrenLayout = $childrenLayout;
+        return $this;
     }
 }

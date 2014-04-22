@@ -17,9 +17,6 @@
 {% endblock form %}
 </div>
 
-{% endblock body %}
-
-{% block javascripts %}
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -45,7 +42,7 @@ function initMenus(el, parent){
     });
 }
 </script>
-{% endblock %}
+{% endblock body %}
 
 {% macro render_widget(form, depth = 0) %}
 <li>
