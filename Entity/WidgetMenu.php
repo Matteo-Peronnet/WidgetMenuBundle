@@ -21,7 +21,7 @@ class WidgetMenu extends Widget
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
@@ -29,19 +29,19 @@ class WidgetMenu extends Widget
      * @Gedmo\Slug(fields={"name"}, separator="-", updatable=false)
      * @ORM\Column(name="slug", type="string", length=255)
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu")
      */
-    private $children;
+    protected $children;
 
     /**
      * @var string
      *
      * @ORM\Column(name="children_layout", type="string", length=255)
      */
-    private $childrenLayout = "dropdown";
+    protected $childrenLayout = "dropdown";
 
     /**
      * To String function
