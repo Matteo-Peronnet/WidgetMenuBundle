@@ -3,7 +3,7 @@
 namespace Victoire\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\CmsBundle\Entity\Widget;
+use Victoire\Bundle\CoreBundle\Entity\Widget;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class WidgetMenu extends Widget
 {
-    use \Victoire\CmsBundle\Entity\Traits\WidgetTrait;
+    use \Victoire\Bundle\CoreBundle\Entity\Traits\WidgetTrait;
 
     /**
      * @var string

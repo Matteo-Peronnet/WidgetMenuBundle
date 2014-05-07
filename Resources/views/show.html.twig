@@ -75,7 +75,7 @@
 {% endmacro %}
 {% macro render_link(item) %}
 {% if item.linkType == 'page' %}
-    <a href="{{ path('victoire_cms_page_show', {'url' : item.page.url }) }}">{{item.title}}</a>
+    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}}</a>
 {% else %}
     <a href="{{item.url}}">{{item.title}}</a>
 {% endif %}
@@ -85,7 +85,7 @@
 {% if item.linkType == 'page' %}
     <a href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
 {% else %}
-    <a href="{{ path('victoire_cms_page_show', {'url' : item.page.url }) }}">{{item.title}} {% if depth == 0 %}<b class="caret"></b></a>
+    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}} {% if depth == 0 %}<b class="caret"></b></a>
 {% endif %}
 {% endif %}
 {% endmacro %}

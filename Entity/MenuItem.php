@@ -2,11 +2,11 @@
 namespace Victoire\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\CmsBundle\Entity\Widget;
+use Victoire\Bundle\CoreBundle\Entity\Widget;
 use Victoire\Bundle\PageBundle\Entity\BasePage;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\Menu\NodeInterface;
-use Victoire\CmsBundle\Annotations as VIC;
+use Victoire\Bundle\CoreBundle\Annotations as VIC;
 
 /**
  * MenuItem

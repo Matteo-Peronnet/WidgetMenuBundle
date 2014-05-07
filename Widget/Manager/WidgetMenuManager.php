@@ -7,7 +7,7 @@ use Victoire\MenuBundle\Form\WidgetMenuType;
 use Victoire\MenuBundle\Entity\WidgetMenu;
 use Victoire\Bundle\PageBundle\Entity\BasePage;
 use Victoire\MenuBundle\Entity\MenuItem;
-use Victoire\CmsBundle\Entity\Widget;
+use Victoire\Bundle\CoreBundle\Entity\Widget;
 
 class WidgetMenuManager
 {
@@ -131,7 +131,7 @@ protected $container;
 
         $widget = $this->newWidget($page, $slot);
         $widget->setCurrentPage($page);
-        $classes = $this->container->get('victoire_cms.annotation_reader')->getBusinessClassesForWidget($widget);
+        $classes = $this->container->get('victoire_core.annotation_reader')->getBusinessClassesForWidget($widget);
 
         if ($entity) {
             $form = $manager->buildForm($this, $widget, $entity, $classes[$entity]);
@@ -186,7 +186,7 @@ protected $container;
         return json_encode(array(
             "success" => false,
             "html"    => $this->container->get('victoire_templating')->render(
-                "VictoireCmsBundle:Widget:Form/new.html.twig",
+                "VictoireCoreBundle:Widget:Form/new.html.twig",
                 array(
                     'classes' => $classes,
                     'forms'   => $forms
@@ -205,7 +205,7 @@ protected $container;
     public function edit(Widget $widget, $entity = null, $manager)
     {
         $request = $this->container->get('request');
-        $classes = $this->container->get('victoire_cms.annotation_reader')->getBusinessClassesForWidget($widget);
+        $classes = $this->container->get('victoire_core.annotation_reader')->getBusinessClassesForWidget($widget);
 
         $form = $manager->buildForm($this, $widget);
 
@@ -247,7 +247,7 @@ protected $container;
         return array(
             "success"  => false,
             "html"     => $this->container->get('victoire_templating')->render(
-                "VictoireCmsBundle:Widget:Form/edit.html.twig",
+                "VictoireCoreBundle:Widget:Form/edit.html.twig",
                 array(
                     'classes' => $classes,
                     'forms'   => $forms,

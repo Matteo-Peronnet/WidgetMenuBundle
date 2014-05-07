@@ -1,12 +1,12 @@
 services:
-    victoire_cms.widget_menu_manager:
+    victoire_core.widget_menu_manager:
         class: Victoire\MenuBundle\Widget\Manager\WidgetMenuManager
         arguments: [@service_container]
 
     widget_menu_manager:
-        alias: victoire_cms.widget_menu_manager
+        alias: victoire_core.widget_menu_manager
 
-    victoire_cms.menu_form:
+    victoire_core.menu_form:
         class: Victoire\MenuBundle\Form\MenuType
         tags:
             - { name: form.type, alias: menu_form }

@@ -5,8 +5,8 @@ namespace Victoire\MenuBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Victoire\CmsBundle\Form\EntityProxyFormType;
-use Victoire\CmsBundle\Form\WidgetType;
+use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
+use Victoire\Bundle\CoreBundle\Form\WidgetType;
 
 /**
  * WidgetMenu form type
@@ -82,6 +82,6 @@ class WidgetMenuType extends WidgetType
      */
     public function getName()
     {
-        return 'appventus_victoirecmsbundle_widgetmenutype';
+        return 'appventus_victoireCoreBundle_widgetmenutype';
     }
 }
