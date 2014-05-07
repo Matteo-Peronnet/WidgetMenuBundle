@@ -30,84 +30,84 @@ class MenuItem  implements NodeInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string
      *
      * @ORM\Column(name="link_type", type="string", length=255)
      */
-    private $linkType;
+    protected $linkType;
 
     /**
      * @var string
      *
      * @ORM\Column(name="route", type="string", length=255, nullable=true)
      */
-    private $route;
+    protected $route;
 
     /**
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
      */
-    private $url;
+    protected $url;
 
     /**
      * @ORM\ManyToOne(targetEntity="WidgetMenu", inversedBy="children", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id", onDelete="cascade")
      */
-    private $widgetMenu;
+    protected $widgetMenu;
 
     /**
      * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\BasePage")
      * @ORM\JoinColumn(name="attached_page_id", referencedColumnName="id", onDelete="cascade", nullable=true)
      */
-    private $page;
+    protected $page;
 
     /**
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
      */
-    private $lft;
+    protected $lft;
 
     /**
      * @Gedmo\TreeLevel
      * @ORM\Column(name="lvl", type="integer")
      */
-    private $lvl;
+    protected $lvl;
 
     /**
      * @Gedmo\TreeRight
      * @ORM\Column(name="rgt", type="integer")
      */
-    private $rgt;
+    protected $rgt;
 
     /**
      * @Gedmo\TreeRoot
      * @ORM\Column(name="root", type="integer", nullable=true)
      */
-    private $root;
+    protected $root;
 
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $parent;
+    protected $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist"})
      * @ORM\OrderBy({"lft" = "ASC"})
      */
-    private $children;
+    protected $children;
 
     /**
      * @var boolean
@@ -115,7 +115,7 @@ class MenuItem  implements NodeInterface
      * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\BasePage")
      * @ORM\JoinColumn(name="root_hierarchy_page", referencedColumnName="id", onDelete="cascade", nullable=true)
      */
-    private $rootHierarchyPage;
+    protected $rootHierarchyPage;
 
     /**
      * @var boolean
