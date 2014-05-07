@@ -5,7 +5,7 @@ namespace Victoire\MenuBundle\Widget\Manager;
 
 use Victoire\MenuBundle\Form\WidgetMenuType;
 use Victoire\MenuBundle\Entity\WidgetMenu;
-use Victoire\PageBundle\Entity\BasePage;
+use Victoire\Bundle\PageBundle\Entity\BasePage;
 use Victoire\MenuBundle\Entity\MenuItem;
 use Victoire\CmsBundle\Entity\Widget;
 
