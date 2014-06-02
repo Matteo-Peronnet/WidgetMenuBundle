@@ -14,8 +14,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class WidgetMenu extends Widget
 {
-    use \Victoire\Bundle\CoreBundle\Entity\Traits\WidgetTrait;
-
     /**
      * @var string
      *
