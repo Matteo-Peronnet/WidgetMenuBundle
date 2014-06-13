@@ -77,9 +77,10 @@ class WidgetMenuType extends WidgetType
         );
     }
 
-
     /**
      * get form name
+     *
+     * @return string The name of the form
      */
     public function getName()
     {

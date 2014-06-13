@@ -16,7 +16,6 @@ use Symfony\Component\Form\FormEvent;
  */
 class MenuType extends AbstractType
 {
-
     /**
      * define form fields
      * @param FormBuilderInterface $builder
@@ -74,8 +73,6 @@ class MenuType extends AbstractType
                 }
             }
         );
-
-       // parent::buildForm($builder, $options);
     }
 
 
@@ -85,8 +82,6 @@ class MenuType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        //parent::setDefaultOptions($resolver);
-
         $resolver->setDefaults(array(
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
             'cascade_validation' => true,
@@ -94,9 +89,10 @@ class MenuType extends AbstractType
         ));
     }
 
-
     /**
      * get form name
+     *
+     * @return string The name of the form
      */
     public function getName()
     {
