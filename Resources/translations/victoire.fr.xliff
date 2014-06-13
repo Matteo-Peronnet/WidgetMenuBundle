@@ -50,6 +50,14 @@
         <source>menu.form.title.label</source>
         <target>Intitulé</target>
       </trans-unit>
+      <trans-unit id="c6f3907cb042d459f6602858d6c2b02112fbab53" resname="modal.form.widget.type.menu.label">
+        <source>modal.form.widget.type.menu.label</source>
+        <target>Widget Menu</target>
+      </trans-unit>
+      <trans-unit id="e46f10823c7ac394d59b10bdd340b281985f1b5f" resname="widget.menu.new.action.label">
+        <source>widget.menu.new.action.label</source>
+        <target>Menu</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

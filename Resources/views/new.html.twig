@@ -4,7 +4,7 @@
 <div id="widget-{{slot}}" class="add-widget">
 {% block form %}
 
-    <ul class="menus" data-prototype="{{ form_widget(form.items.vars.prototype)|e }}<div class='vic-form-group'><a href='#' onClick='addRow(this);return false;' class='add_menu_link'></a></div>">
+    <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
         <li>
             {{ form_errors(form) }}
             {{ form_row(form.name) }}
@@ -35,18 +35,15 @@ $(document).ready(function() {
 {% endblock body %}
 
 {% macro widget_prototype(form) %}
-
-        {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
-        {{ form_widget(form.linkType) }}
-        <span class="page-type">{{ form_widget(form.page) }}</span>
-        <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
-        <span><a href="#" onClick="addSubRow(this, __menu_id__);return false;" class="add_menu_link"></a></span>
-        <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
-        {{ form_rest(form) }}
-
-        <ul style="display: none;" id="menu-__menu_id__">
-            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
-        </ul>
-
+    {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
+    {{ form_widget(form.linkType) }}
+    <span class="page-type">{{ form_widget(form.page) }}</span>
+    <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
+    <span><a href="#" onClick="addSubRow(this, __menu_id__);return false;" class="add_menu_link"></a></span>
+    <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
+    {{ form_rest(form) }}
+    <ul style="display: none;" id="menu-__menu_id__">
+        <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
+    </ul>
 {% endmacro %}
 
