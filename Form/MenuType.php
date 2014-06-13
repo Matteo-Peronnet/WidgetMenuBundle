@@ -1,6 +1,6 @@
 <?php
 
-namespace Victoire\MenuBundle\Form;
+namespace Victoire\Widget\MenuBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -56,15 +56,15 @@ class MenuType extends AbstractType
                 'attr'        => array('class' => 'url-type'),
             ));
 
-
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function(FormEvent $event) {
-                if ($event->getData() && count($event->getData()->getChildren()) > 0 ) {
+            function (FormEvent $event)
+            {
+                if ($event->getData() && count($event->getData()->getChildren()) > 0) {
                     $event->getForm()->add('items', 'collection',
                         array(
                             'property_path' => 'children',
-                            'type' => 'menu_form',
+                            'type' => 'victoire_form_menu',
                             'required'     => false,
                             'allow_add'    => true,
                             'allow_delete' => true,
@@ -75,7 +75,7 @@ class MenuType extends AbstractType
             }
         );
 
-
+       // parent::buildForm($builder, $options);
     }
 
 
@@ -85,8 +85,10 @@ class MenuType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        //parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
-            'data_class'         => 'Victoire\MenuBundle\Entity\MenuItem',
+            'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
             'cascade_validation' => true,
             'translation_domain' => 'victoire'
         ));
@@ -98,6 +100,6 @@ class MenuType extends AbstractType
      */
     public function getName()
     {
-        return 'menu_form';
+        return 'victoire_form_menu';
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
-namespace Victoire\MenuBundle\Entity;
+namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Widget\MenuBundle\Entity\MenuItem;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -30,7 +31,7 @@ class WidgetMenu extends Widget
     protected $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu")
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu",cascade={"persist"})
      */
     protected $children;
 

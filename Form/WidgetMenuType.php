@@ -1,6 +1,6 @@
 <?php
 
-namespace Victoire\MenuBundle\Form;
+namespace Victoire\Widget\MenuBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,6 @@ use Victoire\Bundle\CoreBundle\Form\WidgetType;
  */
 class WidgetMenuType extends WidgetType
 {
-
     /**
      * define form fields
      * @param FormBuilderInterface $builder
@@ -49,16 +48,16 @@ class WidgetMenuType extends WidgetType
                 'collection',
                 array(
                     'property_path' => 'children',
-                    'type'          => 'menu_form',
+                    'type'          => 'victoire_form_menu',
                     'required'      => false,
                     'allow_add'     => true,
                     'allow_delete'  => true,
                     'by_reference'  => false,
                     'prototype'     => true,
                 )
-            )
-        //
-        ;
+            );
+
+        parent::buildForm($builder, $options);
     }
 
     /**
@@ -67,9 +66,11 @@ class WidgetMenuType extends WidgetType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(
             array(
-                'data_class'         => 'Victoire\MenuBundle\Entity\WidgetMenu',
+                'data_class'         => 'Victoire\Widget\MenuBundle\Entity\WidgetMenu',
                 'widget'             => 'menu',
                 'translation_domain' => 'victoire'
             )
@@ -82,6 +83,6 @@ class WidgetMenuType extends WidgetType
      */
     public function getName()
     {
-        return 'appventus_victoirecorebundle_widgetmenutype';
+        return 'victoire_widget_form_menu';
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\MenuBundle\Entity;
+namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
@@ -443,6 +443,12 @@ class MenuItem  implements NodeInterface
         $this->children->removeElement($child);
     }
 
+    /**
+     * Set children
+     *
+     * @param array $children
+     * @return \Victoire\Widget\MenuBundle\Entity\MenuItem
+     */
     public function setChildren($children)
     {
         $this->children = $children;
@@ -460,16 +466,26 @@ class MenuItem  implements NodeInterface
         return $this->children;
     }
 
-
+    /**
+     * Get the name
+     *
+     * @return string
+     */
     public function getName()
     {
         return "menu";
     }
 
+    /**
+     * Get the options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array();
     }
+
     /**
      * Set rot page for hierarchy behavior
      *

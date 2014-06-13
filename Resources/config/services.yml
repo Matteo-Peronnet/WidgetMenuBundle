@@ -1,13 +1,25 @@
 services:
-    victoire_core.widget_menu_manager:
-        class: Victoire\MenuBundle\Widget\Manager\WidgetMenuManager
-        arguments: [@service_container]
+    victoire_core.twig.widget_menu_manager:
+        class: Victoire\Widget\MenuBundle\Widget\Manager\WidgetMenuManager
+        arguments: 
+            - "@service_container"
 
     widget_menu_manager:
-        alias: victoire_core.widget_menu_manager
-
-    victoire_core.menu_form:
-        class: Victoire\MenuBundle\Form\MenuType
+        alias: victoire_core.twig.widget_menu_manager
+        
+    #alias to the entity
+    victoire.widget.menu:
+        class: Victoire\Widget\MenuBundle\Entity\WidgetMenu
+    #alias to the form
+    victoire.widget.form.menu:
+        class: Victoire\Widget\MenuBundle\Form\WidgetMenuType
         tags:
-            - { name: form.type, alias: menu_form }
+            - { name: form.type , alias: victoire_widget_form_menu}
 
+            
+    #alias to the form
+    victoire.form.menu:
+        class: Victoire\Widget\MenuBundle\Form\MenuType
+        tags:
+            - { name: form.type , alias: victoire_form_menu}
+            
