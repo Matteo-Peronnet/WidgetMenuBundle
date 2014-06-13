@@ -17,8 +17,8 @@
         "victoire/victoire"                   : ">=0.1.4"
     },
     "autoload": {
-        "psr-0": { "Victoire\\MenuBundle": "" }
+        "psr-0": { "Victoire\\Widget\\MenuBundle": "" }
     },
     "minimum-stability": "dev",
-    "target-dir": "Victoire/MenuBundle"
+    "target-dir": "Victoire/Widget/MenuBundle"
 }
