@@ -59,8 +59,9 @@ class WidgetMenu extends Widget
      * @param string $child
      * @return MenuItem
      */
-    public function addChild($child)
+    public function addChild(MenuItem $child)
     {
+        $child->setWidgetMenu($this);
         $this->children[] = $child;
 
         return $this;
