@@ -23,7 +23,6 @@ class MenuType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('title', 'text', array(
                 'label'    => 'menu.form.title.label',
@@ -55,19 +54,30 @@ class MenuType extends AbstractType
                 'attr'        => array('class' => 'url-type'),
             ));
 
+        //we use the PRE_SUBMIT event to avoid having a circular reference
         $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event)
+            FormEvents::PRE_SUBMIT,
+            function ($event)
             {
-                if ($event->getData() && count($event->getData()->getChildren()) > 0) {
-                    $event->getForm()->add('items', 'collection',
+                $rawData = $event->getData();
+
+                if (isset($rawData['items'])) {
+                    $addChildren = true;
+                } else {
+                    $addChildren = false;
+                }
+
+                //did some children was added in the form
+                if ($addChildren) {
+                    $form = $event->getForm();
+                    $form->add('items', 'collection',
                         array(
                             'property_path' => 'children',
                             'type' => 'victoire_form_menu',
                             'required'     => false,
                             'allow_add'    => true,
                             'allow_delete' => true,
-                            'by_reference' => false,
+                            'by_reference' => false
                         )
                     );
                 }

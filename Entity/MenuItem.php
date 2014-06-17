@@ -104,7 +104,7 @@ class MenuItem  implements NodeInterface
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist", "remove"})
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
@@ -554,5 +554,15 @@ class MenuItem  implements NodeInterface
     public function getWidgetMenu()
     {
         return $this->widgetMenu;
+    }
+
+    /**
+     * The to string method
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return '#MenuItem'.$this->getId();
     }
 }

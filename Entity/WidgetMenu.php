@@ -31,7 +31,7 @@ class WidgetMenu extends Widget
     protected $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu", cascade={"persist", "remove"})
      */
     protected $children;
 
