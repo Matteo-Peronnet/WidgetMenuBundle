@@ -3,7 +3,9 @@
         <li class="dropdown {% if depth > 0 %}submenu{% endif %}">
             {{ _self.render_dropdown_link(menuItem, depth) }}
                 <ul class="dropdown-menu {% if depth > 0 %}submenu-show submenu-hide{% endif %}">
-                    {{_self.render_children(item, childrenLayout, depth + 1)}}
+                    {% for child in menuItem.children %}
+                        {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child, 'childrenLayout': childrenLayout, 'depth': depth + 1 } %}
+                    {% endfor %}
                 </ul>
         </li>
     {% elseif childrenLayout == "panel" %}

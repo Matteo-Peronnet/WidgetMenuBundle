@@ -7,7 +7,7 @@
                 <div class="nav-collapse">
                     <ul class="nav">
                         {% for child in widget.children %}
-                            {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child } %}
+                            {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child, 'childrenLayout': widget.childrenLayout, 'depth': 0 } %}
                         {% endfor %}
                     </ul>
                 </div>
