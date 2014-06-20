@@ -2,26 +2,27 @@
 {% block body %}
 
 <div id="widget-{{slot}}" class="add-widget">
-{% block form %}
+    <div id="picker-static" class="vic-tab-pane vic-active">
+        <form name="widget" action={% spaceless %}
+                                        {{ path('victoire_core_widget_create', {'page': page.id,'slot':slot, 'type': widget.type, 'entity': entity} ) }}
+                                    {% endspaceless %} method="POST" class="vic-form-horizontal" data-slot="{{ widget.slot }}">
 
-    <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
-        <li>
-            {{ form_errors(form) }}
-            {{ form_row(form.name) }}
-            <ul id="menu-0">
-                <div class='vic-form-group'>
-                    <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
-                </div>
+            <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
+                <li>
+                    {{ form_errors(form) }}
+                    {{ form_row(form.name) }}
+                    <ul id="menu-0">
+                        <div class='vic-form-group'>
+                            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
+                        </div>
+                    </ul>
+                </li>
             </ul>
-        </li>
-    </ul>
-    {{form_errors(form)}}
-    {{form_rest(form)}}
-
-{% endblock form %}
+        {{form_errors(form)}}
+        {{form_rest(form)}}
+        </form>
+    </div>
 </div>
-
-{% block javascripts %}
 
 <script type="text/javascript">
 
@@ -31,7 +32,6 @@ $(document).ready(function() {
 });
 
 </script>
-{% endblock %}
 {% endblock body %}
 
 {% macro widget_prototype(form) %}
