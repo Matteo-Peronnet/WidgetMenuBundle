@@ -61,7 +61,7 @@ class MenuItem  implements NodeInterface
     protected $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WidgetMenu", inversedBy="children", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="WidgetMenu", inversedBy="children")
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id", onDelete="cascade")
      */
     protected $widgetMenu;
@@ -99,12 +99,12 @@ class MenuItem  implements NodeInterface
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
@@ -427,6 +427,7 @@ class MenuItem  implements NodeInterface
      */
     public function addChild(MenuItem $child)
     {
+        zdebug(__FUNCTION__);
         $child->setParent($this);
         $this->children[] = $child;
 
@@ -440,9 +441,20 @@ class MenuItem  implements NodeInterface
      */
     public function removeChild(MenuItem $child)
     {
+        zdebug(__FUNCTION__);
         $this->children->removeElement($child);
     }
 
+    /**
+     * Remove children
+     *
+     * @param Menu $child
+     */
+    public function removeChildren(MenuItem $child)
+    {
+        zdebug(__FUNCTION__);
+        $this->children->removeElement($child);
+    }
     /**
      * Set children
      *
@@ -451,6 +463,8 @@ class MenuItem  implements NodeInterface
      */
     public function setChildren($children)
     {
+        zdebug(__FUNCTION__);
+
         $this->children = $children;
 
         return $this;
@@ -463,6 +477,8 @@ class MenuItem  implements NodeInterface
      */
     public function getChildren()
     {
+        zdebug(__FUNCTION__);
+
         return $this->children;
     }
 
