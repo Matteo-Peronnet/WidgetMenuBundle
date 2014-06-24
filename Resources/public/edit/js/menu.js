@@ -9,7 +9,11 @@ function Menu(el)
     
     if (parentEl.length > 0) {
         var parentAttrId = parentEl.attr('id');
-        this.parentId = parseInt(parentAttrId.replace('menu-', ''), 0);
+        if (parentAttrId === undefined) {
+            this.parentId = null;
+        } else {
+            this.parentId = parseInt(parentAttrId.replace('menu-', ''), 0);
+        }
     } else {
         this.parentId = null;
     }
@@ -64,13 +68,19 @@ function initMenus()
     var links = $('.add_menu_link');
     var menu = null;
     
-    $.each(links, function (index, link) {
+    //we want the links from the bottom to the top
+    $.each(links.get().reverse(), function (index, link) {
         menu = new Menu(link);
         
         //we update the item id with the generated one
         $(link).parent().parent().parent('ul').attr('id', 'menu-' + menu.id);
         //we update the index of the menu
-        menu.index = $(link).parent().parent().parent('ul').attr('data-index');
+        var dataIndex = $(link).parent().parent().parent('ul').attr('data-index');
+        if (dataIndex === undefined) {
+            menu.index = 0;
+        } else {
+            menu.index = dataIndex;
+        }
     });
 }
 
