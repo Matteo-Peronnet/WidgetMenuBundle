@@ -1,49 +1,68 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
 {% block body %}
-
 <div id="widget-{{slot}}" class="add-widget">
-    <div id="picker-static" class="vic-tab-pane vic-active">
-        <form name="widget" action={% spaceless %}
-                                        {{ path('victoire_core_widget_create', {'page': page.id,'slot':slot, 'type': widget.type, 'entity': entity} ) }}
-                                    {% endspaceless %} method="POST" class="vic-form-horizontal" data-slot="{{ widget.slot }}">
-
+    <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
+        {{ form_start(form) }}
             <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
                 <li>
                     {{ form_errors(form) }}
                     {{ form_row(form.name) }}
-                    <ul id="menu-0">
+                    <ul id="menu-0" data-index="0">
                         <div class='vic-form-group'>
-                            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
+                            {% for item in form.items %}
+                                <li>
+                                    {{ _self.widget_prototype(item, loop.index0) }}
+                                </li>
+                            {% endfor %}
+                        </div>
+                        <div class='vic-form-group'>
+                            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a></span>
                         </div>
                     </ul>
                 </li>
             </ul>
-        {{form_errors(form)}}
-        {{form_rest(form)}}
-        </form>
+            {{form_errors(form)}}
+            {{form_rest(form)}}
+        {{ form_end(form) }}
     </div>
 </div>
 
 <script type="text/javascript">
-
-$(document).ready(function() {
-    menus = new Array();
-    prototype = $('ul.menus').attr('data-prototype');
-});
-
+    $(document).ready(function() {
+        menus = new Array();
+        prototype = $('ul.menus').attr('data-prototype');
+    });
 </script>
 {% endblock body %}
 
-{% macro widget_prototype(form) %}
+{% macro widget_prototype(form, index) %}
+<div class='vic-form-group'>
     {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
     {{ form_widget(form.linkType) }}
+
+    {% if index == null and index != 0 %}
+        {% set menuId = '__menu_id__' %}
+    {% else %}
+        {% set menuId = index %}
+    {% endif %}
     <span class="page-type">{{ form_widget(form.page) }}</span>
     <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
-    <span><a href="#" onClick="addSubRow(this, __menu_id__);return false;" class="add_menu_link"></a></span>
     <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
-    {{ form_rest(form) }}
-    <ul style="display: none;" id="menu-__menu_id__">
-        <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
+    <ul id="menu-{{ menuId }}" data-index="{{ index }}">
+        <div class='vic-form-group'>
+            {% if form.items is defined %}
+                {% for item in form.items %}
+                    <li>
+                        {{ _self.widget_prototype(item, loop.index0) }}
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class='vic-form-group'>
+            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a></span>
+        </div>
     </ul>
+    {{ form_rest(form) }}
+</div>
 {% endmacro %}
 
