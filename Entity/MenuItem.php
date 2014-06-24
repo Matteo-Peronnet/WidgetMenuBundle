@@ -427,7 +427,6 @@ class MenuItem  implements NodeInterface
      */
     public function addChild(MenuItem $child)
     {
-        zdebug(__FUNCTION__);
         $child->setParent($this);
         $this->children[] = $child;
 
@@ -441,7 +440,6 @@ class MenuItem  implements NodeInterface
      */
     public function removeChild(MenuItem $child)
     {
-        zdebug(__FUNCTION__);
         $this->children->removeElement($child);
     }
 
@@ -452,7 +450,6 @@ class MenuItem  implements NodeInterface
      */
     public function removeChildren(MenuItem $child)
     {
-        zdebug(__FUNCTION__);
         $this->children->removeElement($child);
     }
     /**
@@ -463,8 +460,6 @@ class MenuItem  implements NodeInterface
      */
     public function setChildren($children)
     {
-        zdebug(__FUNCTION__);
-
         $this->children = $children;
 
         return $this;
@@ -477,8 +472,6 @@ class MenuItem  implements NodeInterface
      */
     public function getChildren()
     {
-        zdebug(__FUNCTION__);
-
         return $this->children;
     }
 
