@@ -1,89 +1,72 @@
 {% extends 'VictoireCoreBundle:Widget:edit.html.twig' %}
 
 {% block body %}
-
-<div class="edit-widget">
-{% block form %}
-<ul class="menus">
-<li>
-    {{form_errors(form)}}
-    {{form_row(form.name)}}
-    <ul class="menu-widget" data-prototype="{{_self.widget_prototype(form.items.vars.prototype)|e }}">
-        {{_self.render_widget(form) }}
-    </ul>
-    {{form_widget(form._token)}}
-    </li>
-</ul>
-{% endblock form %}
+<div id="widget-{{slot}}" class="add-widget">
+    <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
+        {{ form_start(form) }}
+            <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
+                <li>
+                    {{ form_errors(form) }}
+                    {{ form_row(form.name) }}
+                    <ul>
+                        <div class='vic-form-group'>
+                            {% for item in form.items %}
+                                <li>
+                                    {{ _self.widget_prototype(item, loop.index0) }}
+                                </li>
+                            {% endfor %}
+                        </div>
+                        <div class='vic-form-group'>
+                            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a></span>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+            {{form_errors(form)}}
+            {{form_rest(form)}}
+        {{ form_end(form) }}
+    </div>
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        menus = new Array();
+        prototype = $('ul.menus').attr('data-prototype');
 
-$(document).ready(function() {
-    menus = new Array();
-    prototype = $('ul.menu-widget').attr('data-prototype');
-    initMenus($('#menu-0'));
-});
-
-function initMenus(el, parent){
-    el.children('li').each(function() {
-        var menu = new Menu($(this));
-
-        menu.init();
-        menu.item = menu.item - 1;
-        if (parent) {
-            menu.parent = parent;
-        }
-        $(this).html($(this).html().replace(/__menu_id__/g, menu.id));
-
-        if ($(this).children('.menu-item').length > 0) {
-            initMenus($(this).children('.menu-item'), menu);
-        }
+        //for the existing menus, we generate the js menus
+        initMenus();
     });
-}
 </script>
 {% endblock body %}
 
-{% macro render_widget(form, depth = 0) %}
-<li>
-    {% if depth != 0 %}
-        {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
-        {{ form_widget(form.linkType) }}
-        <span class="page-type"{% if form.linkType.vars.data == 'url' %} style="display: none;"{% endif %}>{{ form_widget(form.page) }}</span>
-        <span class="url-type"{% if form.linkType.vars.data == 'page' or not form.linkType.vars.data %} style="display: none;"{% endif %}>{{ form_widget(form.url) }}</span>
-        <span><a href="#" onClick="addSubRow(this, {{depth}});return false;" class="add_menu_link"></a></span>
-        <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
-    {% endif %}
-    {% if form.items is defined and form.items|length > 0 %}
-        <ul class="menu-item" id="menu-{{depth}}">
-            {% for child in form.items %}
-                {% set depth = depth + 1 %}
-                {{ _self.render_widget(child, depth) }}
-            {% endfor %}
+{% macro widget_prototype(form, index) %}
+<div class='vic-form-group'>
+    {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
+    {{ form_widget(form.linkType) }}
+
+    {% if index == null and index != 0 %}
+        {% set menuId = '__menu_id__' %}
     {% else %}
-        <ul style="display: none;" class="menu-item" id="menu-{{depth}}">
+        {% set menuId = index %}
     {% endif %}
-            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
-        </ul>
-        {{form_errors(form)}}
-        {{ form_rest(form) }}
-</li>
+    <span class="page-type">{{ form_widget(form.page) }}</span>
+    <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
+    <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
+    <ul id="menu-{{ menuId }}" data-index="{{ index }}">
+        <div class='vic-form-group'>
+            {% if form.items is defined %}
+                {% for item in form.items %}
+                    <li>
+                        {{ _self.widget_prototype(item, loop.index0) }}
+                    </li>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class='vic-form-group'>
+            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a></span>
+        </div>
+    </ul>
+    {{ form_rest(form) }}
+</div>
 {% endmacro %}
-
-{% macro widget_prototype(form) %}
-
-        {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
-        {{ form_widget(form.linkType) }}
-        <span class="page-type">{{ form_widget(form.page) }}</span>
-        <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
-        <span><a href="#" onClick="addSubRow(this, __menu_id__);return false;" class="add_menu_link"></a></span>
-        <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
-        {{ form_rest(form) }}
-
-        <ul style="display: none;" id="menu-__menu_id__">
-            <a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a>
-        </ul>
-
-{% endmacro %}
-
 

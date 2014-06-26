@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2013-11-27T18:15:06Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="7c274dc63876be15e5bbafb68070ccf04ba9910b" resname="widget.menu.new.action.label">
-        <source>widget.menu.new.action.label</source>
-        <target>Menu</target>
+      <trans-unit id="68eab2be7e9b3374674ed82985f88b908bc9c2ee" resname="menu.form.childrenLayout.choices.panel.label">
+        <source>menu.form.childrenLayout.choices.panel.label</source>
+        <target>Menu déroulant</target>
       </trans-unit>
-      <trans-unit resname="modal.form.widget.type.menu.label">
-        <source>modal.form.widget.type.menu.label</source>
-        <target>Paramètres du menu</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.name.label">
-        <source>menu.form.name.label</source>
-        <target>Nom du menu</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.title.label">
-        <source>menu.form.title.label</source>
-        <target>Intitulé</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.link_type.page">
-        <source>menu.form.link_type.page</source>
-        <target>Type page</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.link_type.url">
-        <source>menu.form.link_type.url</source>
-        <target>Url</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.page.label">
-        <source>menu.form.page.label</source>
-        <target>Page</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.page.blank">
-        <source>menu.form.page.blank</source>
-        <target>Choisissez une page</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.childrenLayout.label">
-        <source>menu.form.childrenLayout.label</source>
-        <target>Affichage du second niveau</target>
-      </trans-unit>
-      <trans-unit resname="menu.form.childrenLayout.choices.rollover.label">
+      <trans-unit id="3f79b8b40d5fe45da81c31c25a789d4835190d70" resname="menu.form.childrenLayout.choices.rollover.label">
         <source>menu.form.childrenLayout.choices.rollover.label</source>
         <target>Rollover</target>
       </trans-unit>
-      <trans-unit resname="menu.form.childrenLayout.choices.panel.label">
-        <source>menu.form.childrenLayout.choices.panel.label</source>
-        <target>Menu déroulant</target>
+      <trans-unit id="a5d825e8084d34d6ef4b559a911dc1df5ac8d25e" resname="menu.form.childrenLayout.label">
+        <source>menu.form.childrenLayout.label</source>
+        <target>Affichage du second niveau</target>
+      </trans-unit>
+      <trans-unit id="45a878a54ff38689d87488acccad61b76adf139d" resname="menu.form.link_type.label">
+        <source>menu.form.link_type.label</source>
+        <target state="new">Type de lien</target>
+      </trans-unit>
+      <trans-unit id="ec52a858b0786dc104df3840f47902741f95412d" resname="menu.form.link_type.page">
+        <source>menu.form.link_type.page</source>
+        <target>Page</target>
+      </trans-unit>
+      <trans-unit id="93bbdd209265f665090f17eb0133a725782b592c" resname="menu.form.link_type.url">
+        <source>menu.form.link_type.url</source>
+        <target>Url</target>
+      </trans-unit>
+      <trans-unit id="77132be5838a3654cf994757d61fbf4edce18af2" resname="menu.form.name.label">
+        <source>menu.form.name.label</source>
+        <target>Nom du menu</target>
+      </trans-unit>
+      <trans-unit id="2f69e82b0d28c097ddbb314879fca260a5d527a4" resname="menu.form.page.blank">
+        <source>menu.form.page.blank</source>
+        <target>Choisissez une page</target>
+      </trans-unit>
+      <trans-unit id="1ee3089e3ef2690a089d968a7b5c9c5949f0c04e" resname="menu.form.page.label">
+        <source>menu.form.page.label</source>
+        <target>Page</target>
+      </trans-unit>
+      <trans-unit id="990caf02e7cb2cb07ff637550c4531dcac3a60ad" resname="menu.form.page.url">
+        <source>menu.form.page.url</source>
+        <target>Url de la page</target>
+      </trans-unit>
+      <trans-unit id="d86b36f9743d6a6846ca030e5344cd5ab0c53351" resname="menu.form.title.label">
+        <source>menu.form.title.label</source>
+        <target>Intitulé</target>
+      </trans-unit>
+      <trans-unit id="c6f3907cb042d459f6602858d6c2b02112fbab53" resname="modal.form.widget.type.menu.label">
+        <source>modal.form.widget.type.menu.label</source>
+        <target>Widget Menu</target>
+      </trans-unit>
+      <trans-unit id="e46f10823c7ac394d59b10bdd340b281985f1b5f" resname="widget.menu.new.action.label">
+        <source>widget.menu.new.action.label</source>
+        <target>Menu</target>
       </trans-unit>
     </body>
   </file>

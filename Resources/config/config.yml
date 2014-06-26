@@ -1,5 +1,5 @@
 victoire_core:
     widgets:
         menu:
-            class: "Victoire\\MenuBundle\\Entity\\WidgetMenu"
+            class: "Victoire\\Widget\\MenuBundle\\Entity\\WidgetMenu"
             name: menu

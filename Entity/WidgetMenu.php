@@ -1,9 +1,10 @@
 <?php
 
-namespace Victoire\MenuBundle\Entity;
+namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Widget\MenuBundle\Entity\MenuItem;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -14,8 +15,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class WidgetMenu extends Widget
 {
-    use \Victoire\Bundle\CoreBundle\Entity\Traits\WidgetTrait;
-
     /**
      * @var string
      *
@@ -32,7 +31,7 @@ class WidgetMenu extends Widget
     protected $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu")
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $children;
 
@@ -60,8 +59,9 @@ class WidgetMenu extends Widget
      * @param string $child
      * @return MenuItem
      */
-    public function addChild($child)
+    public function addChild(MenuItem $child)
     {
+        $child->setWidgetMenu($this);
         $this->children[] = $child;
 
         return $this;

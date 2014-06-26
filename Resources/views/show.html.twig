@@ -1,15 +1,4 @@
-{% block body %}
-
-{#
-   _   _   _   _   _   _   _   _   _
-  / \ / \ / \ / \ / \ / \ / \ / \ / \
- ( b ) o ) o ) t ) s ) t ) r ) a ) p )
-  \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/ \_/
-
-#}
-
-<div class="vic-widget vic-widget-menu" id="widget-{{ widget.id }}">
-{% block actions %}{{cms_widget_actions(widget)}}{% endblock actions %}
+{% extends 'VictoireCoreBundle:Widget:show.html.twig' %}
 
 {% block content %}
     <div class="navbar">
@@ -17,76 +6,19 @@
             <div class="container-fluid">
                 <div class="nav-collapse">
                     <ul class="nav">
-                        {{ _self.render_children(widget, widget.childrenLayout) }}
+                        {% for child in widget.children %}
+                            {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child, 'childrenLayout': widget.childrenLayout, 'depth': 0 } %}
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
         </div>
     </div>
+	{% if app.request.isXmlHttpRequest %}
+		<script type="text/javascript">
+		    $(document).ready(function() {
+		        initSubMenu();
+		    });
+		</script>
+	{% endif %}
 {% endblock content %}
-</div>
-{% if app.request.isXmlHttpRequest %}
-<script type="text/javascript">
-    $(document).ready(function() {
-        initSubMenu();
-    });
-</script>
-{% endif %}
-
-{% endblock body %}
-
-{% macro render_children(widget, childrenLayout, depth = 0) %}
-    {% for item in widget.children %}
-        {% if item.children|length > 0 %}
-            {% if childrenLayout == "rollover" %}
-                <li class="dropdown {% if depth > 0 %}submenu{% endif %}">
-                    {{ _self.render_dropdown_link(item, depth) }}
-                    <ul class="dropdown-menu {% if depth > 0 %}submenu-show submenu-hide{% endif %}">
-                        {{_self.render_children(item, childrenLayout, depth + 1)}}
-                    </ul>
-                </li>
-            {% elseif childrenLayout == "panel" %}
-                <li>
-                    {{ _self.render_link(item, depth) }}
-                    <div class="submenu-slider">
-                        <div class="submenu-slider-container">
-                            <div class="span3 column">
-                            {% for level2item in item.children %}
-                                {{ _self.render_link(level2item) }}
-                                <ul>
-                                    {% for level3item in level2item.children %}
-                                    <li>
-                                        {{ _self.render_link(level3item) }}
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            {% endif %}
-        {% else %}
-            <li>{{ _self.render_link(item) }}</li>
-        {% endif %}
-
-    {% endfor %}
-
-{% endmacro %}
-{% macro render_link(item) %}
-{% if item.linkType == 'page' %}
-    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}}</a>
-{% else %}
-    <a href="{{item.url}}">{{item.title}}</a>
-{% endif %}
-{% endmacro %}
-
-{% macro render_dropdown_link(item, depth) %}
-{% if item.linkType != 'page' %}
-    <a href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
-{% else %}
-    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}} {% if depth == 0 %}<b class="caret"></b></a>
-{% endif %}
-{% endif %}
-{% endmacro %}
-

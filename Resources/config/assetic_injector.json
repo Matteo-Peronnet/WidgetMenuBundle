@@ -5,22 +5,22 @@
         {
             "victoire-edit":
             [
-                "@VictoireMenuBundle/Resources/public/edit/js/menu.js"
+                "@VictoireWidgetMenuBundle/Resources/public/edit/js/menu.js"
             ],
             "foot":
             [
-                "@VictoireMenuBundle/Resources/public/js/menu.js"
+                "@VictoireWidgetMenuBundle/Resources/public/js/menu.js"
             ]
          },
         "stylesheets":
         {
             "victoire-edit":
             [
-                "@VictoireMenuBundle/Resources/public/less/menu_form.less"
+                "@VictoireWidgetMenuBundle/Resources/public/less/menu_form.less"
             ],
             "head":
             [
-                "@VictoireMenuBundle/Resources/public/less/menu.less"
+                "@VictoireWidgetMenuBundle/Resources/public/less/menu.less"
             ]
         }
     }

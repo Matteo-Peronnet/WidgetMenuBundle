@@ -1,5 +1,5 @@
 <?php
-namespace Victoire\MenuBundle\Entity;
+namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
@@ -61,7 +61,7 @@ class MenuItem  implements NodeInterface
     protected $url;
 
     /**
-     * @ORM\ManyToOne(targetEntity="WidgetMenu", inversedBy="children", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="WidgetMenu", inversedBy="children")
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id", onDelete="cascade")
      */
     protected $widgetMenu;
@@ -99,12 +99,12 @@ class MenuItem  implements NodeInterface
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"lft" = "ASC"})
      */
     protected $children;
@@ -443,6 +443,21 @@ class MenuItem  implements NodeInterface
         $this->children->removeElement($child);
     }
 
+    /**
+     * Remove children
+     *
+     * @param Menu $child
+     */
+    public function removeChildren(MenuItem $child)
+    {
+        $this->children->removeElement($child);
+    }
+    /**
+     * Set children
+     *
+     * @param array $children
+     * @return \Victoire\Widget\MenuBundle\Entity\MenuItem
+     */
     public function setChildren($children)
     {
         $this->children = $children;
@@ -460,16 +475,26 @@ class MenuItem  implements NodeInterface
         return $this->children;
     }
 
-
+    /**
+     * Get the name
+     *
+     * @return string
+     */
     public function getName()
     {
         return "menu";
     }
 
+    /**
+     * Get the options
+     *
+     * @return array
+     */
     public function getOptions()
     {
         return array();
     }
+
     /**
      * Set rot page for hierarchy behavior
      *
@@ -538,5 +563,15 @@ class MenuItem  implements NodeInterface
     public function getWidgetMenu()
     {
         return $this->widgetMenu;
+    }
+
+    /**
+     * The to string method
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return '#MenuItem'.$this->getId();
     }
 }

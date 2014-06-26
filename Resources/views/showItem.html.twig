@@ -1,0 +1,53 @@
+{% if menuItem.children|length > 0 %}
+    {% if childrenLayout == "rollover" %}
+        <li class="dropdown {% if depth > 0 %}submenu{% endif %}">
+            {{ _self.render_dropdown_link(menuItem, depth) }}
+                <ul class="dropdown-menu {% if depth > 0 %}submenu-show submenu-hide{% endif %}">
+                    {% for child in menuItem.children %}
+                        {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child, 'childrenLayout': childrenLayout, 'depth': depth + 1 } %}
+                    {% endfor %}
+                </ul>
+        </li>
+    {% elseif childrenLayout == "panel" %}
+        <li>
+            {{ _self.render_link(menuItem, depth) }}
+            <div class="submenu-slider">
+                <div class="submenu-slider-container">
+                    <div class="span3 column">
+                        {% for level2item in menuItem.children %}
+                            {{ _self.render_link(level2item) }}
+                            <ul>
+                                {% for level3item in level2item.children %}
+                                    <li>
+                                        {{ _self.render_link(level3item) }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </li>
+    {% endif %}
+{% else %}
+    <li>{{ _self.render_link(menuItem) }}</li>
+{% endif %}
+
+{% macro render_link(item) %}
+{% if item.linkType == 'page' %}
+    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}}</a>
+{% else %}
+    <a href="{{item.url}}">{{item.title}}</a>
+{% endif %}
+{% endmacro %}
+
+{% macro render_dropdown_link(item, depth) %}
+	{% if item.linkType != 'page' %}
+	    <a href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>
+    {% endif %}</a>
+	{% else %}
+	    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}} {% if depth == 0 %}<b class="caret"></b></a>
+	{% endif %}
+	{% endif %}
+{% endmacro %}
+
