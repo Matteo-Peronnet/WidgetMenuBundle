@@ -3,6 +3,7 @@ services:
         class: Victoire\Widget\MenuBundle\Widget\Manager\WidgetMenuManager
         arguments: 
             - "@service_container"
+            - "Menu"
 
     widget_menu_manager:
         alias: victoire_core.twig.widget_menu_manager

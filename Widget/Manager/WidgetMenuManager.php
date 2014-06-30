@@ -33,13 +33,5 @@ use Victoire\Bundle\CoreBundle\Widget\Managers\WidgetManagerInterface;
  */
 class WidgetMenuManager extends BaseWidgetManager implements WidgetManagerInterface
 {
-    /**
-     * The name of the widget
-     *
-     * @return string
-     */
-    public function getWidgetName()
-    {
-        return 'Menu';
-    }
+
 }
