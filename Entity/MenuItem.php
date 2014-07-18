@@ -3,7 +3,7 @@ namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Victoire\Bundle\CoreBundle\Entity\Widget;
-use Victoire\Bundle\PageBundle\Entity\BasePage;
+use Victoire\Bundle\PageBundle\Entity\Page;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\Menu\NodeInterface;
 use Victoire\Bundle\CoreBundle\Annotations as VIC;
@@ -67,7 +67,7 @@ class MenuItem  implements NodeInterface
     protected $widgetMenu;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\BasePage")
+     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\Page")
      * @ORM\JoinColumn(name="attached_page_id", referencedColumnName="id", onDelete="cascade", nullable=true)
      */
     protected $page;
@@ -112,7 +112,7 @@ class MenuItem  implements NodeInterface
     /**
      * @var boolean
      *
-     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\BasePage")
+     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\Page")
      * @ORM\JoinColumn(name="root_hierarchy_page", referencedColumnName="id", onDelete="cascade", nullable=true)
      */
     protected $rootHierarchyPage;
@@ -352,10 +352,10 @@ class MenuItem  implements NodeInterface
     /**
      * Set page
      *
-     * @param BasePage $page
+     * @param Page $page
      * @return Menu
      */
-    public function setPage(BasePage $page = null)
+    public function setPage(Page $page = null)
     {
         $this->page = $page;
 
@@ -365,7 +365,7 @@ class MenuItem  implements NodeInterface
     /**
      * Get page
      *
-     * @return BasePage
+     * @return Page
      */
     public function getPage()
     {
@@ -378,7 +378,7 @@ class MenuItem  implements NodeInterface
      * @param BaseattachedPage $attachedPage
      * @return Menu
      */
-    public function setAttachedPage(BasePage $attachedPage = null)
+    public function setAttachedPage(Page $attachedPage = null)
     {
         $this->attachedPage = $attachedPage;
 
