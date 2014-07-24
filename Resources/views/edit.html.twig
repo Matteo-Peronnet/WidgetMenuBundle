@@ -36,7 +36,20 @@
         //for the existing menus, we generate the js menus
         initMenus();
     });
+    $("[id$='linkType']").on('change', function() {
+        if($(this).val() == 'page') {
+            $(this).siblings('.page-type').show();
+            $(this).siblings('.url-type').hide();
+        } else {
+            $(this).siblings('.page-type').hide();
+            $(this).siblings('.url-type').show();
+        }
+    });
 </script>
+
+{# {% javascripts '@VictoireWidgetMenuBundle/Resources/public/js/menu-linktype.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %} #}
 {% endblock body %}
 
 {% macro widget_prototype(form, index) %}
