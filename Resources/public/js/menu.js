@@ -85,3 +85,7 @@ function initSubMenu() {
 $(window).load(function(){
     initSubMenu();
 });
+
+var url = window.location.href;
+url = '/' + url.replace(/^(?:\/\/|[^\/]+)*\//, "");
+$('.vic-widget-menu a[href="'+ url +'"]').addClass('is-active');
