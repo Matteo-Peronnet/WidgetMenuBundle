@@ -7,7 +7,7 @@
                 <li>
                     {{ form_errors(form) }}
                     {{ form_row(form.name) }}
-                    <ul id="menu-0" data-index="0">
+                    <ul>
                         <div class='vic-form-group'>
                             {% for item in form.items %}
                                 <li>
@@ -22,15 +22,19 @@
                 </li>
             </ul>
             {{form_errors(form)}}
+            {# Add this line to set the widget as rendered to not display it twice in form_rest #}
+            {% do form.items.setRendered %}
             {{form_rest(form)}}
         {{ form_end(form) }}
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $vic(document).ready(function() {
         menus = new Array();
-        prototype = $('ul.menus').attr('data-prototype');
+        prototype = $vic('ul.menus').attr('data-prototype');
+        //for the existing menus, we generate the js menus
+        initMenus();
     });
 </script>
 
