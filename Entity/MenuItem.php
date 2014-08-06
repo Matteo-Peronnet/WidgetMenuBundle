@@ -2,11 +2,10 @@
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Victoire\Bundle\PageBundle\Entity\Page;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\Menu\NodeInterface;
-use Victoire\Bundle\CoreBundle\Annotations as VIC;
 
 /**
  * MenuItem
@@ -156,7 +155,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string   $title
      * @return MenuItem
      */
     public function setTitle($title)
@@ -179,7 +178,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set linkType
      *
-     * @param string $linkType
+     * @param  string   $linkType
      * @return MenuItem
      */
     public function setlinkType($linkType)
@@ -202,7 +201,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set route
      *
-     * @param string $route
+     * @param  string   $route
      * @return MenuItem
      */
     public function setRoute($route)
@@ -225,7 +224,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set url
      *
-     * @param string $url
+     * @param  string   $url
      * @return MenuItem
      */
     public function setUrl($url)
@@ -247,7 +246,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set menu
      *
-     * @param string $menu
+     * @param  string $menu
      * @return Menu
      */
     public function setMenu(WidgetMenu $menu)
@@ -270,7 +269,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set lft
      *
-     * @param integer $lft
+     * @param  integer $lft
      * @return Menu
      */
     public function setLft($lft)
@@ -293,7 +292,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set lvl
      *
-     * @param integer $lvl
+     * @param  integer $lvl
      * @return Menu
      */
     public function setLvl($lvl)
@@ -316,7 +315,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set rgt
      *
-     * @param integer $rgt
+     * @param  integer $rgt
      * @return Menu
      */
     public function setRgt($rgt)
@@ -339,7 +338,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set root
      *
-     * @param integer $root
+     * @param  integer $root
      * @return Menu
      */
     public function setRoot($root)
@@ -362,7 +361,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set page
      *
-     * @param Page $page
+     * @param  Page $page
      * @return Menu
      */
     public function setPage(Page $page = null)
@@ -385,7 +384,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set attachedPage
      *
-     * @param BaseattachedPage $attachedPage
+     * @param  BaseattachedPage $attachedPage
      * @return Menu
      */
     public function setAttachedPage(Page $attachedPage = null)
@@ -405,11 +404,10 @@ class MenuItem  implements NodeInterface
         return $this->attachedPage;
     }
 
-
     /**
      * Set parent
      *
-     * @param Menu $parent
+     * @param  Menu $parent
      * @return Menu
      */
     public function setParent(MenuItem $parent = null)
@@ -432,7 +430,7 @@ class MenuItem  implements NodeInterface
     /**
      * Add child
      *
-     * @param Menu $child
+     * @param  Menu $child
      * @return Menu
      */
     public function addChild(MenuItem $child)
@@ -465,7 +463,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set children
      *
-     * @param array $children
+     * @param  array                                       $children
      * @return \Victoire\Widget\MenuBundle\Entity\MenuItem
      */
     public function setChildren($children)
@@ -508,7 +506,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set rot page for hierarchy behavior
      *
-     * @param integer $rootHierarchyPage
+     * @param  integer $rootHierarchyPage
      * @return Menu
      */
     public function setRootHierarchyPage($rootHierarchyPage)
@@ -528,11 +526,10 @@ class MenuItem  implements NodeInterface
         return $this->rootHierarchyPage;
     }
 
-
     /**
      * Set menu type
      *
-     * @param integer $menuType
+     * @param  integer $menuType
      * @return Menu
      */
     public function setMenuType($menuType)
@@ -555,7 +552,7 @@ class MenuItem  implements NodeInterface
     /**
      * Set widget menu
      *
-     * @param integer $widgetMenu
+     * @param  integer $widgetMenu
      * @return Menu
      */
     public function setWidgetMenu($widgetMenu)
