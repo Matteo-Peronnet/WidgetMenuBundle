@@ -1,13 +1,9 @@
 services:
-    victoire_core.twig.widget_menu_manager:
-        class: Victoire\Widget\MenuBundle\Widget\Manager\WidgetMenuManager
-        arguments: 
-            - "@service_container"
-            - "Menu"
 
-    widget_menu_manager:
-        alias: victoire_core.twig.widget_menu_manager
-        
+    victoire_core.widget_menu_content_resolver:
+        class: Victoire\Bundle\WidgetBundle\Resolver\BaseWidgetContentResolver
+        tags:
+            - { name: victoire_widget.widget_content_resolver, alias: Menu }
     #alias to the entity
     victoire.widget.menu:
         class: Victoire\Widget\MenuBundle\Entity\WidgetMenu
@@ -17,10 +13,10 @@ services:
         tags:
             - { name: form.type , alias: victoire_widget_form_menu}
 
-            
+
     #alias to the form
     victoire.form.menu:
         class: Victoire\Widget\MenuBundle\Form\MenuType
         tags:
             - { name: form.type , alias: victoire_form_menu}
-            
+

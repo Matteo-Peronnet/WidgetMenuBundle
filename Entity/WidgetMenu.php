@@ -3,7 +3,7 @@
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**

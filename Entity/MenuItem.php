@@ -2,7 +2,7 @@
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Victoire\Bundle\PageBundle\Entity\Page;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\Menu\NodeInterface;
