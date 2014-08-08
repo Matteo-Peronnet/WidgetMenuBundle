@@ -5,11 +5,7 @@ namespace Victoire\Widget\MenuBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Victoire\Bundle\CoreBundle\Form\EntityProxyFormType;
-use Victoire\Bundle\CoreBundle\Form\WidgetType;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
-
 
 /**
  * Menu form type
@@ -45,7 +41,7 @@ class MenuType extends AbstractType
                 'required'    => false,
                 'empty_value' => 'menu.form.page.blank',
                 'class'       => 'VictoirePageBundle:Page',
-                'property'    => 'title',
+                'property'    => 'name',
                 'attr'        => array('class' => 'page-type'),
             ))
             ->add('url', 'text', array(
@@ -59,8 +55,7 @@ class MenuType extends AbstractType
          */
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function ($event)
-            {
+            function ($event) {
                 $entity = $event->getData();
 
                 if ($entity !== null) {
@@ -81,8 +76,7 @@ class MenuType extends AbstractType
          */
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
-            function ($event)
-            {
+            function ($event) {
                 $rawData = $event->getData();
 
                 if (isset($rawData['items'])) {
