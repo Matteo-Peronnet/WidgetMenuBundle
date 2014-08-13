@@ -33,7 +33,7 @@ class MenuType extends AbstractType
                 ),
                 'attr'        => array(
                     'class' => 'item-type',
-                    'onchange' => 'trackChange(this);'
+                    'onchange' => 'trackMenuItemTypeChange(this);'
                 )
             ))
             ->add('page', 'entity', array(
