@@ -6,7 +6,6 @@ function Menu(el)
     this.el = el;
     
     var parentEl = $(el).parent().parent().parent('ul').parent().parent().parent().parent('ul');
-    
     if (parentEl.length > 0) {
         var parentAttrId = parentEl.attr('id');
         if (parentAttrId === undefined) {
@@ -26,14 +25,11 @@ function Menu(el)
     while (menus[this.id] !== undefined) {
         this.id = this.id + 1;
     }
-    
+
     this.index = this.item;
-    
-    console.log(this.id);
-    console.log(this.parentId);
-    
+
     menus[this.id] = this;
-    
+
     //get the parent by its id
     if (this.parentId === null) {
         this.parent = null;
@@ -55,7 +51,7 @@ function deleteRow(el)
         var menuId = $(elem).attr('id').replace('menu-', '');
         menus[menuId] = undefined;
     });
-    
+
     if ($(el).parent('span').parent('div').parent('li').parent('ul').children('li').length === 1) {
         $(el).parent('span').parent('div').parent('li').parent('ul').html('');
     } else {
@@ -71,7 +67,7 @@ function initMenus()
     //we want the links from the bottom to the top
     $.each(links.get().reverse(), function (index, link) {
         menu = new Menu(link);
-        
+
         //we update the item id with the generated one
         $(link).parent().parent().parent('ul').attr('id', 'menu-' + menu.id);
         //we update the index of the menu
