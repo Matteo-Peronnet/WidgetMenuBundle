@@ -1,13 +1,20 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
+
 {% block body %}
-<div id="widget-{{slot}}" class="add-widget">
+<div id="widget-{{slot}}" class="add-widget vic-menuWidget">
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
             <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
                 <li>
                     {{ form_errors(form) }}
-                    {{ form_row(form.name) }}
-                    <ul id="menu-0" data-index="0">
+
+                    <div class="form-group vic-menuWidget-name">
+                        {{ form_label(form.name) }}
+                        {{ form_widget(form.name) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+
+                    <ul class="vic-menuWidget-itemList">
                         <div class='vic-form-group'>
                             {% for item in form.items %}
                                 <li>
@@ -15,22 +22,40 @@
                                 </li>
                             {% endfor %}
                         </div>
-                        <div class='vic-form-group'>
-                            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a></span>
+
+                        <div class='vic-form-group vic-add_menu_sibling-Container'>
+                            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link vic-btn vic-btn-default add_menu_sibling"><i class="fa fa-plus"></i></a></span>
                         </div>
                     </ul>
                 </li>
             </ul>
             {{form_errors(form)}}
-            {{form_rest(form)}}
+            {# Add this line to set the widget as rendered to not display it twice in form_rest #}
+            {% do form.items.setRendered %}
+
+            <div class="vic-menuWidget-rest">
+                {{form_rest(form)}}
+            </div>
         {{ form_end(form) }}
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $vic(document).ready(function() {
         menus = new Array();
-        prototype = $('ul.menus').attr('data-prototype');
+        prototype = $vic('ul.menus').attr('data-prototype');
+
+        //for the existing menus, we generate the js menus
+        initMenus();
+    });
+    $("[id$='linkType']").on('change', function() {
+        if($(this).val() == 'page') {
+            $(this).siblings('.page-type').show();
+            $(this).siblings('.url-type').hide();
+        } else {
+            $(this).siblings('.page-type').hide();
+            $(this).siblings('.url-type').show();
+        }
     });
 </script>
 
@@ -40,18 +65,18 @@
 {% endblock body %}
 
 {% macro widget_prototype(form, index) %}
-<div class='vic-form-group'>
-    {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label}}) }}
-    {{ form_widget(form.linkType) }}
+<div class='vic-form-group vic-menuWidget-item-formGroup'>
+    {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
+    {{ form_widget(form.linkType, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
 
     {% if index == null and index != 0 %}
         {% set menuId = '__menu_id__' %}
     {% else %}
         {% set menuId = index %}
     {% endif %}
-    <span class="page-type">{{ form_widget(form.page) }}</span>
-    <span class="url-type" style="display: none;">{{ form_widget(form.url) }}</span>
-    <span><a onClick="deleteRow(this);return false;" href="#" class="btn-remove" ><i class="fa fa-trash-o fa-2x"></i></a></span>
+    <span class="page-type">{{ form_widget(form.page, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}</span>
+    <span class="url-type" style="display: none;">{{ form_widget(form.url, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}</span>
+    <span><a onClick="deleteRow(this);return false;" href="#" class="vic-btn vic-btn-danger vic-menuWidget-btn vic-menuWidget-deleteRow vic-btn" ><i class="fa fa-trash-o"></i></a></span>
     <ul id="menu-{{ menuId }}" data-index="{{ index }}">
         <div class='vic-form-group'>
             {% if form.items is defined %}
@@ -62,11 +87,10 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <div class='vic-form-group'>
-            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link"></a></span>
+        <div class='add_menu_link-container'>
+            <span><a href="#" onClick="addRow(this);return false;" class="vic-btn vic-menuWidget-btn vic-btn-default add_menu_link"></a></span>
         </div>
     </ul>
     {{ form_rest(form) }}
 </div>
 {% endmacro %}
-

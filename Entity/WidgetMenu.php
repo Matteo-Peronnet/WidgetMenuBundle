@@ -3,14 +3,13 @@
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\CoreBundle\Entity\Widget;
-use Victoire\Widget\MenuBundle\Entity\MenuItem;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * WidgetMenu
  *
- * @ORM\Table("cms_widget_menu")
+ * @ORM\Table("vic_widget_menu")
  * @ORM\Entity
  */
 class WidgetMenu extends Widget
@@ -55,8 +54,8 @@ class WidgetMenu extends Widget
 
     /**
      * Add child
-     *
      * @param string $child
+     *
      * @return MenuItem
      */
     public function addChild(MenuItem $child)
@@ -69,8 +68,8 @@ class WidgetMenu extends Widget
 
     /**
      * Remove child
-     *
      * @param string $child
+     *
      * @return MenuItem
      */
     public function removeChild($child)
@@ -82,8 +81,8 @@ class WidgetMenu extends Widget
 
     /**
      * Set children
-     *
      * @param string $children
+     *
      * @return MenuItem
      */
     public function setChildren($children)
@@ -108,8 +107,8 @@ class WidgetMenu extends Widget
 
     /**
      * Set name
-     *
      * @param string $name
+     *
      * @return MenuItem
      */
     public function setName($name)
@@ -131,8 +130,8 @@ class WidgetMenu extends Widget
 
     /**
      * Set slug
-     *
      * @param string $slug
+     *
      * @return MenuItem
      */
     public function setSlug($slug)
@@ -164,13 +163,14 @@ class WidgetMenu extends Widget
 
     /**
      * Set childrenLayout
-     *
      * @param string $childrenLayout
+     *
      * @return $this
      */
     public function setChildrenLayout($childrenLayout)
     {
         $this->childrenLayout = $childrenLayout;
+
         return $this;
     }
 }
