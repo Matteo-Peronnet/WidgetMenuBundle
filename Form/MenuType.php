@@ -24,31 +24,8 @@ class MenuType extends AbstractType
                 'label'    => 'menu.form.title.label',
                 'required' => true,
             ))
-            ->add('linkType', 'choice', array(
-                'label'       => 'menu.form.link_type.label',
-                'required'    => true,
-                'choices'     => array(
-                    'page'  => 'menu.form.link_type.page',
-                    'url'   => 'menu.form.link_type.url'
-                ),
-                'attr'        => array(
-                    'class' => 'item-type',
-                    'onchange' => 'trackMenuItemTypeChange(this);'
-                )
-            ))
-            ->add('page', 'entity', array(
-                'label'       => 'menu.form.page.label',
-                'required'    => false,
-                'empty_value' => 'menu.form.page.blank',
-                'class'       => 'VictoirePageBundle:Page',
-                'property'    => 'name',
-                'attr'        => array('class' => 'page-type'),
-            ))
-            ->add('url', 'text', array(
-                'label'       => 'menu.form.page.url',
-                'required'    => false,
-                'attr'        => array('class' => 'url-type'),
-            ));
+
+            ->add('link', 'victoire_link');
 
         /*
          * When we are editing a menu, we must add the sub menus if there are some children in the entity

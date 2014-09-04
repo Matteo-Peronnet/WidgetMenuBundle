@@ -16,6 +16,7 @@ use Knp\Menu\NodeInterface;
  */
 class MenuItem  implements NodeInterface
 {
+    use \Victoire\Bundle\WidgetBundle\Entity\Traits\LinkTrait;
 
     const MENU_HIERARCHICAL = 1;
     const MENU_MANUAL = 2;
@@ -39,37 +40,10 @@ class MenuItem  implements NodeInterface
     protected $title;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="link_type", type="string", length=255)
-     */
-    protected $linkType;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="route", type="string", length=255, nullable=true)
-     */
-    protected $route;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url", type="string", length=255, nullable=true)
-     */
-    protected $url;
-
-    /**
      * @ORM\ManyToOne(targetEntity="WidgetMenu", inversedBy="children")
      * @ORM\JoinColumn(name="menu_id", referencedColumnName="id", onDelete="cascade")
      */
     protected $widgetMenu;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\Page")
-     * @ORM\JoinColumn(name="attached_page_id", referencedColumnName="id", onDelete="cascade", nullable=true)
-     */
-    protected $page;
 
     /**
      * @Gedmo\TreeLeft
@@ -175,74 +149,6 @@ class MenuItem  implements NodeInterface
         return $this->title;
     }
 
-    /**
-     * Set linkType
-     * @param string $linkType
-     *
-     * @return MenuItem
-     */
-    public function setlinkType($linkType)
-    {
-        $this->linkType = $linkType;
-
-        return $this;
-    }
-
-    /**
-     * Get linkType
-     *
-     * @return string
-     */
-    public function getlinkType()
-    {
-        return $this->linkType;
-    }
-
-    /**
-     * Set route
-     * @param string $route
-     *
-     * @return MenuItem
-     */
-    public function setRoute($route)
-    {
-        $this->route = $route;
-
-        return $this;
-    }
-
-    /**
-     * Get route
-     *
-     * @return string
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    /**
-     * Set url
-     * @param string $url
-     *
-     * @return MenuItem
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
     /**
      * Set menu
      * @param string $menu
@@ -356,52 +262,6 @@ class MenuItem  implements NodeInterface
     public function getRoot()
     {
         return $this->root;
-    }
-
-    /**
-     * Set page
-     * @param Page $page
-     *
-     * @return Menu
-     */
-    public function setPage(Page $page = null)
-    {
-        $this->page = $page;
-
-        return $this;
-    }
-
-    /**
-     * Get page
-     *
-     * @return Page
-     */
-    public function getPage()
-    {
-        return $this->page;
-    }
-
-    /**
-     * Set attachedPage
-     * @param BaseattachedPage $attachedPage
-     *
-     * @return Menu
-     */
-    public function setAttachedPage(Page $attachedPage = null)
-    {
-        $this->attachedPage = $attachedPage;
-
-        return $this;
-    }
-
-    /**
-     * Get attachedPage
-     *
-     * @return BaseattachedPage
-     */
-    public function getAttachedPage()
-    {
-        return $this->attachedPage;
     }
 
     /**
