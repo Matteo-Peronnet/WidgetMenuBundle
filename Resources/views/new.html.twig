@@ -55,7 +55,7 @@
 {% macro widget_prototype(form, index) %}
 <div class='vic-form-group vic-menuWidget-item-formGroup'>
     {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
-    {{ form_widget(form.link.linkType, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
+    {{ form_widget(form.link.linkType, {'attr': {'class': 'vic-menuWidget-formControl victoire-linkType'}}) }}
 
     {% if index == null and index != 0 %}
         {% set menuId = '__menu_id__' %}
