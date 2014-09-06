@@ -34,11 +34,10 @@
 {% endif %}
 
 {% macro render_link(item) %}
-{% if item.linkType == 'page' %}
-    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}}</a>
-{% else %}
-    <a href="{{item.url}}">{{item.title}}</a>
-{% endif %}
+{% set targetTag = item.target == "ajax-modal" ? 'data-toggle=' ~ item.target : 'target=' ~ item.target|default('_parent') %}
+<a href="{{ vic_link_url(item.linkParameters) }}" {{ targetTag }}>
+    {{ item.title }}
+</a>
 {% endmacro %}
 
 {% macro render_dropdown_link(item, depth) %}
