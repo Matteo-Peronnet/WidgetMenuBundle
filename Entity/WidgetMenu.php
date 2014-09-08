@@ -31,6 +31,7 @@ class WidgetMenu extends Widget
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="widgetMenu", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $children;
 

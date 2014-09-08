@@ -4,31 +4,27 @@
 <div id="widget-{{slot}}" class="add-widget vic-menuWidget">
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
-            <ul class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
-                <li>
-                    {{ form_errors(form) }}
+            <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
+                {{ form_errors(form) }}
 
-                    <div class="form-group vic-menuWidget-name">
-                        {{ form_label(form.name) }}
-                        {{ form_widget(form.name) }}
-                        {{ form_errors(form.name) }}
+                <div class="form-group vic-menuWidget-name">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name) }}
+                    {{ form_errors(form.name) }}
+                </div>
+
+                <ul class="vic-menuWidget-itemList" id="menu-items">
+                    {% for item in form.items %}
+                        <li class='vic-form-group'>
+                            {{ _self.widget_prototype(item, loop.index0) }}
+                        </li>
+                    {% endfor %}
+
+                    <div class='vic-form-group vic-add_menu_sibling-Container'>
+                        <span><a href="#" onclick="addRow(this);return false;" class="add_menu_link vic-btn vic-btn-default add_menu_sibling"><i class="fa fa-plus"></i></a></span>
                     </div>
-
-                    <ul class="vic-menuWidget-itemList">
-                        <div class='vic-form-group'>
-                            {% for item in form.items %}
-                                <li>
-                                    {{ _self.widget_prototype(item, loop.index0) }}
-                                </li>
-                            {% endfor %}
-                        </div>
-
-                        <div class='vic-form-group vic-add_menu_sibling-Container'>
-                            <span><a href="#" onClick="addRow(this);return false;" class="add_menu_link vic-btn vic-btn-default add_menu_sibling"><i class="fa fa-plus"></i></a></span>
-                        </div>
-                    </ul>
-                </li>
-            </ul>
+                </ul>
+            </div>
             {{form_errors(form)}}
             {# Add this line to set the widget as rendered to not display it twice in form_rest #}
             {% do form.items.setRendered %}
@@ -43,10 +39,30 @@
 <script type="text/javascript">
     $vic(document).ready(function() {
         menus = new Array();
-        prototype = $vic('ul.menus').attr('data-prototype');
+        prototype = $vic('div.menus').attr('data-prototype');
 
         //for the existing menus, we generate the js menus
         initMenus();
+
+        $vic(".vic-menuWidget-itemList").sortable({
+            items: "> li",
+            placeholder: "vic-ui-state-highlight",
+            update: function (event, ui)
+            {
+                pos = 0;
+                $vic(this).children().each(function (){
+                    $vic('[data-type="position"]', this).val(++pos);
+                });
+            },
+            create: function (event, ui)
+            {
+                pos = 0;
+                $vic(this).children().each(function ()
+                {
+                    $vic('[data-type="position"]', this).val(++pos);
+                });
+            }
+        });
     });
 </script>
 
@@ -79,7 +95,7 @@
         {{ form_widget(form.link.target, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
     </span>
     <span>
-        <a onClick="deleteRow(this);return false;" href="#" class="vic-btn vic-btn-danger vic-menuWidget-btn vic-menuWidget-deleteRow vic-btn" ><i class="fa fa-trash-o"></i></a>
+        <a onclick="deleteRow(this);return false;" href="#" class="vic-btn vic-btn-danger vic-menuWidget-btn vic-menuWidget-deleteRow vic-btn" ><i class="fa fa-trash-o"></i></a>
     </span>
     <ul id="menu-{{ menuId }}" data-index="{{ index }}">
         <div class='vic-form-group'>
@@ -92,7 +108,7 @@
             {% endif %}
         </div>
         <div class='add_menu_link-container'>
-            <span><a href="#" onClick="addRow(this);return false;" class="vic-btn vic-menuWidget-btn vic-btn-default add_menu_link"></a></span>
+            <span><a href="#" onclick="addRow(this);return false;" class="vic-btn vic-menuWidget-btn vic-btn-default add_menu_link"></a></span>
         </div>
     </ul>
     {{ form_rest(form) }}

@@ -2,15 +2,15 @@
 
 namespace Victoire\Widget\MenuBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
 
 /**
  * Menu form type
  */
-class MenuType extends AbstractType
+class MenuType extends WidgetListingItemType
 {
     /**
      * define form fields
@@ -19,13 +19,15 @@ class MenuType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
             ->add('title', 'text', array(
                 'label'    => 'menu.form.title.label',
                 'required' => true,
-            ))
-
-            ->add('link', 'victoire_link');
+                )
+            )
+            ->add('link', 'victoire_link')
+            ->remove('removeButton');
 
         /*
          * When we are editing a menu, we must add the sub menus if there are some children in the entity
@@ -95,6 +97,8 @@ class MenuType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        parent::setDefaultOptions($resolver);
+
         $resolver->setDefaults(array(
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
             'cascade_validation' => true,

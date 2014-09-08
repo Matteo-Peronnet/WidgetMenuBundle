@@ -2,10 +2,11 @@
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\WidgetBundle\Entity\Widget;
-use Victoire\Bundle\PageBundle\Entity\Page;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\Menu\NodeInterface;
+use Victoire\Bundle\PageBundle\Entity\Page;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
+use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
 
 /**
  * MenuItem
@@ -14,7 +15,7 @@ use Knp\Menu\NodeInterface;
  * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
  * @Gedmo\Tree(type="nested")
  */
-class MenuItem  implements NodeInterface
+class MenuItem extends WidgetListingItem implements NodeInterface
 {
     use \Victoire\Bundle\WidgetBundle\Entity\Traits\LinkTrait;
 
