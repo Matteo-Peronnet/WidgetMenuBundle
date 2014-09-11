@@ -4,7 +4,7 @@
 <div id="widget-{{slot}}" class="add-widget vic-menuWidget">
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
-            <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}">
+            <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}" role="menu-item">
                 {{ form_errors(form) }}
 
                 <div class="form-group vic-menuWidget-name">
@@ -12,18 +12,14 @@
                     {{ form_widget(form.name) }}
                     {{ form_errors(form.name) }}
                 </div>
-
-                <ul class="vic-menuWidget-itemList" id="menu-items">
+                <ul class="vic-menuWidget-itemList" id="menu-items" data-menu="0">
                     {% for item in form.items %}
-                        <li class='vic-form-group'>
-                            {{ _self.widget_prototype(item, loop.index0) }}
-                        </li>
+                        {{ _self.widget_prototype(item, loop.index0) }}
                     {% endfor %}
-
-                    <div class='vic-form-group vic-add_menu_sibling-Container'>
-                        <span><a href="#" onclick="addRow(this);return false;" class="add_menu_link vic-btn vic-btn-default add_menu_sibling"><i class="fa fa-plus"></i></a></span>
-                    </div>
                 </ul>
+                <div class='vic-form-group vic-add_menu_sibling-Container'>
+                    <span><a href="#" onclick="addRootItem(this);return false;" class="add_menu_link vic-btn vic-btn-default add_menu_sibling"><i class="fa fa-plus"></i></a></span>
+                </div>
             </div>
             {{form_errors(form)}}
             {# Add this line to set the widget as rendered to not display it twice in form_rest #}
@@ -69,15 +65,31 @@
 {% endblock body %}
 
 {% macro widget_prototype(form, index) %}
-<div class='vic-form-group vic-menuWidget-item-formGroup'>
+<li class='vic-form-group vic-menuWidget-item-formGroup' role="menu-item" data-index="{{ index is not null ? index : '__menu_index__' }}">
+    {{ _self.link_render_form(form) }}
+
+    <ul class="vic-menuWidget-itemList" data-menu="__menu_id__">
+        {% if form.items is defined %}
+            {% for item in form.items %}
+                {{ _self.widget_prototype(item, loop.index0) }}
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <div class='add_menu_link-container'>
+        <span><a href="#" onclick="addRow(this);return false;" class="vic-btn vic-menuWidget-btn vic-btn-default add_menu_link"></a></span>
+    </div>
+    {{ form_rest(form) }}
+</li>
+
+
+{% endmacro %}
+
+
+{% macro link_render_form(form) %}
+
     {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
     {{ form_widget(form.link.linkType, {'attr': {'class': 'vic-menuWidget-formControl victoire-linkType'}}) }}
 
-    {% if index == null and index != 0 %}
-        {% set menuId = '__menu_id__' %}
-    {% else %}
-        {% set menuId = index %}
-    {% endif %}
     <span class="page-type vic-hidden">
         {{ form_widget(form.link.page, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
     </span>
@@ -97,25 +109,4 @@
     <span>
         <a onclick="deleteRow(this);return false;" href="#" class="vic-btn vic-btn-danger vic-menuWidget-btn vic-menuWidget-deleteRow vic-btn" ><i class="fa fa-trash-o"></i></a>
     </span>
-    <ul id="menu-{{ menuId }}" data-index="{{ index }}">
-        <div class='vic-form-group'>
-            {% if form.items is defined %}
-                {% for item in form.items %}
-                    <li>
-                        {{ _self.widget_prototype(item, loop.index0) }}
-                    </li>
-                {% endfor %}
-            {% endif %}
-        </div>
-        <div class='add_menu_link-container'>
-            <span><a href="#" onclick="addRow(this);return false;" class="vic-btn vic-menuWidget-btn vic-btn-default add_menu_link"></a></span>
-        </div>
-    </ul>
-    {{ form_rest(form) }}
-</div>
-
-<script type="text/javascript">
-    showSelectedLinkType($vic('#{{form.link.linkType.vars.id}}'))
-</script>
-
 {% endmacro %}

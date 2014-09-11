@@ -73,7 +73,7 @@ class MenuItem extends WidgetListingItem implements NodeInterface
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="cascade")
      */
     protected $parent;
 
