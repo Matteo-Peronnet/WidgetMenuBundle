@@ -25,7 +25,7 @@ class WidgetMenuType extends WidgetType
                 array(
                     'label'     => 'menu.form.name.label',
                     'required'  => true,
-                    'help_label_tooltip' => array('menu.form.name.help_label_tooltip')
+                    'vic_help_label_tooltip' => array('menu.form.name.help_label_tooltip')
                 )
             )
             ->add(
@@ -38,7 +38,7 @@ class WidgetMenuType extends WidgetType
                         'panel'    => 'menu.form.childrenLayout.choices.panel.label'
                     ),
                     'required'  => true,
-                    'help_label_tooltip' => array('menu.form.childrenLayout.help_label_tooltip')
+                    'vic_help_label_tooltip' => array('menu.form.childrenLayout.help_label_tooltip')
                 )
             )
             ->add(
