@@ -102,7 +102,10 @@ class MenuType extends WidgetListingItemType
         $resolver->setDefaults(array(
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
             'cascade_validation' => true,
-            'translation_domain' => 'victoire'
+            'translation_domain' => 'victoire',
+            'namespace' => null,
+            'entityName' => null,
+
         ));
     }
 
