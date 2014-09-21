@@ -4,7 +4,7 @@
 <div id="widget-{{slot}}" class="add-widget vic-menuWidget">
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
-            <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}" role="menu-item">
+            <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
                 {{ form_errors(form) }}
 
                 <div class="form-group vic-menuWidget-name">
@@ -12,7 +12,7 @@
                     {{ form_widget(form.name) }}
                     {{ form_errors(form.name) }}
                 </div>
-                <ul class="vic-menuWidget-itemList" id="menu-items" data-menu="0">
+                <ul class="vic-menuWidget-itemList" role="menu-container">
                     {% for item in form.items %}
                         {{ _self.widget_prototype(item, loop.index0) }}
                     {% endfor %}
@@ -65,10 +65,10 @@
 {% endblock body %}
 
 {% macro widget_prototype(form, index) %}
-<li class='vic-form-group vic-menuWidget-item-formGroup' role="menu-item" data-index="{{ index is not null ? index : '__menu_index__' }}">
+<li class='vic-form-group vic-menuWidget-item-formGroup' role="menu" data-index="{{ index is not null ? index : '__menu_index__' }}" data-menu="__menu_id__" data-init="false">
     {{ _self.link_render_form(form) }}
 
-    <ul class="vic-menuWidget-itemList" data-menu="__menu_id__">
+    <ul class="vic-menuWidget-itemList" role="menu-container">
         {% if form.items is defined %}
             {% for item in form.items %}
                 {{ _self.widget_prototype(item, loop.index0) }}

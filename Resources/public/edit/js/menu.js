@@ -1,49 +1,55 @@
 /*global menus, $ */
 
 
-function Menu(parent)
+function Menu(menuElement)
 {
+    this.element = $vic(menuElement);
+    this.index = $vic(menuElement).children('[data-init="true"]').length;
 
-    this.index = $vic(parent).children('li').length;
+
     var lastMaxId = 0;
-    $vic('[data-menu]').each(function() {
-        if (!isNaN($vic(this).attr('data-menu')) && $vic(this).attr('data-menu') > lastMaxId) {
-            lastMaxId = parseInt($vic(this).attr('data-menu'));
+    $vic('[data-init=true]').each(function(index, el) {
+
+        if (!isNaN($vic(el).attr('data-menu'))
+            && $vic(el).attr('data-menu') > lastMaxId) {
+            lastMaxId = parseInt($vic(el).attr('data-menu'));
         }
     });
     this.id = lastMaxId + 1;
-    this.parentId = $vic(parent).attr('data-menu');
+
+    this.parentId =  $vic(menuElement).parents('li[role="menu"]').first().data('menu');
     //get the parent by its id
     if (this.parentId == null || this.parentId == 0) {
         this.parent = null;
+        this.parentId = 0;
     } else {
         this.parent = menus[this.parentId];
     }
-
     menus[this.id] = this;
+
 
 }
 
 function addRootItem(el)
 {
-    var menuItems = $vic(el).parents('div').first().prev('ul');
+    var menuElement = $vic(el).parents('div').first().prev('ul');
     // var parentMenu = $vic('#menu-items');
-    var menu = new Menu(menuItems);
+    var menu = new Menu(menuElement);
     menu.init();
     menu.append();
 }
 function addRow(el)
 {
-    var menuItems = $vic(el).parents('div').first().prev('ul');
+    var menuElement = $vic(el).parents('div').first().prev('ul');
     // var parentMenu = $vic(el).parents('[role="menu-item"]').first();
-    var menu = new Menu(menuItems);
+    var menu = new Menu(menuElement);
     menu.init();
     menu.append();
 }
 
 function deleteRow(el)
 {
-    var menu = $vic(el).parents('li[role="menu-item"]').first();
+    var menu = $vic(el).parents('li[role="menu"]').first();
     menus[menu.data('menu')] = undefined;
     menu.remove();
 
@@ -52,25 +58,36 @@ function deleteRow(el)
 function initMenus()
 {
     var links = $vic('.add_menu_link');
-    var menu = null;
+    var menu = {id: 0};
 
     //we want the links from the bottom to the top
     $vic.each(links, function (index, link) {
 
-        var parentMenu = $vic(link).parents('[role="menu-item"]').first();
-
-        var menuItems = $vic(link).parents('div').first().prev('ul');
-        menu = new Menu(menuItems);
-        //we update the item id with the generated one
-        $vic(menuItems).attr('data-menu', menu.id);
-        //we update the index of the menu
-        // var dataIndex = $vic(parentMenu).attr('data-index');
-        // if (dataIndex === undefined) {
-        //     menu.index = 0;
-        // } else {
-        //     menu.index = dataIndex;
-        // }
+        var menuElement = $vic(link).parents('li[role="menu"]').first();
+        if (menuElement.length > 0) {
+            menu = new Menu(menuElement);
+            menu.update();
+        }
     });
+
+    //This is exactly the same loop as the one just before
+    //We need to close the previous loop and iterate on a new one because
+    //we operated on the DOM that is updated only when the loop ends.
+    $vic.each(links, function (index, link) {
+        var menuElement = $vic(link).parents('li[role="menu"]').first();
+        var menu = menus[menuElement.attr('data-menu')];
+
+        var parentMenuElement = $vic(menuElement).parents('li[role="menu"]').first();
+
+        var parentMenu = menus[parentMenuElement.attr('data-menu')];
+        if (parentMenu != undefined) {
+            menu.parentId = parentMenu.id;
+            menu.parent = parentMenu;
+
+            menus[menu.id] = menu;
+        }
+    });
+
 
     showSelectedLinkType($vic('.victoire-linkType'));
 }
@@ -78,31 +95,37 @@ function initMenus()
 Menu.prototype.init = function ()
 {
     var currentMenu = this;
-    var name = '';
+    var name = '[' + currentMenu.index + ']';
     var i = 0;
     do {
         i++;
-        if (currentMenu.parent == null) {
-            name = '[' + currentMenu.index + ']' + name;
-        } else {
-            name = '[items][' + currentMenu.index + ']' + name;
+        if (currentMenu.parent != null) {
+            name = '[' + currentMenu.parent.index + '][items]' + name;
         }
         currentMenu = currentMenu.parent;
     } while (currentMenu != null && i < 10);
-
     var newForm = prototype.replace(/\[__name__\]/g, name);
     var name =  name.replace(/\]\[/g, '_');
     var name =  name.replace(/\]/g, '_');
     var name =  name.replace(/\[/g, '_');
     var newForm = newForm.replace(/__name__/g, name);
     var newForm = newForm.replace(/__menu_id__/g, this.id);
-    this.newForm = newForm.replace(/__menu_index__/g, this.index);
+    var newForm = newForm.replace(/__menu_index__/g, this.index);
+    this.newForm = $vic.parseHTML(newForm);
+    $vic(this.newForm).attr('data-init', "true");
 };
 
+Menu.prototype.update = function ()
+{
+    $vic(this.element).replaceWith(this.element);
+    $vic(this.element).attr('data-menu', this.id);
+    $vic(this.element).attr('data-init', "true");
+
+    showSelectedLinkType($vic(this.element).find('.victoire-linkType'));
+};
 Menu.prototype.append = function ()
 {
-    console.log(this.parentId);
-    $vic('[data-menu="' + this.parentId + '"]').append(this.newForm);
+    $vic('[data-menu="' + this.parentId + '"]').children('[role="menu-container"]').first().append(this.newForm);
     showSelectedLinkType($vic(this.newForm).find('.victoire-linkType'));
 };
 
