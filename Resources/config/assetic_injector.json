@@ -9,9 +9,10 @@
             ],
             "foot":
             [
-                "@VictoireWidgetMenuBundle/Resources/public/js/menu.js"
+                "@VictoireWidgetMenuBundle/Resources/public/js/menu.js",
+                "@VictoireWidgetMenuBundle/Resources/public/js/responsive-menu.js"
             ]
-         },
+        },
         "stylesheets":
         {
             "victoire-edit":
@@ -20,7 +21,8 @@
             ],
             "head":
             [
-                "@VictoireWidgetMenuBundle/Resources/public/less/menu.less"
+                "@VictoireWidgetMenuBundle/Resources/public/less/menu.less",
+                "@VictoireWidgetMenuBundle/Resources/public/less/menu-responsive.less"
             ]
         }
     }
