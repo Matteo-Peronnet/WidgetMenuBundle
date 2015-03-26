@@ -1,33 +1,52 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
 
 {% block body %}
-<div id="widget-{{slot}}" class="add-widget vic-menuWidget">
+<div id="widget-{{ slot }}" class="add-widget vic-menuWidget">
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
-            <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
-                {{ form_errors(form) }}
 
-                <div class="form-group vic-menuWidget-name">
-                    {{ form_label(form.name) }}
-                    {{ form_widget(form.name) }}
-                    {{ form_errors(form.name) }}
+        <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
+            {{ form_errors(form) }}
+
+            <div class="row" id="vic-menuform-header">
+                <div class="col-md-3 col-sm-4">
+                    {{ form_row(form.name) }}
                 </div>
-                <ul class="vic-menuWidget-itemList" role="menu-container">
-                    {% for item in form.items %}
-                        {{ _self.widget_prototype(item, loop.index0) }}
-                    {% endfor %}
-                </ul>
-                <div class='vic-form-group vic-add_menu_sibling-Container'>
-                    <span><a href="#" onclick="addRootItem(this);return false;" class="add_menu_link vic-btn vic-btn-default add_menu_sibling"><i class="fa fa-plus"></i></a></span>
+
+                <div class="col-md-3 col-sm-4">
+                    {{ form_row(form.childrenLayout) }}
                 </div>
             </div>
-            {{form_errors(form)}}
-            {# Add this line to set the widget as rendered to not display it twice in form_rest #}
-            {% do form.items.setRendered %}
 
-            <div class="vic-menuWidget-rest">
-                {{form_rest(form)}}
+            <ul class="vic-clearfix vic-menuform-list" role="menu-container">
+                {% for item in form.items %}
+                {{ _self.widget_prototype(item, loop.index0) }}
+                {% endfor %}
+            </ul>
+
+            <div class='vic-form-group vic-add_menu_sibling-Container'>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <a class="vic-btn vic-btn-success" href="#" onclick="addRootItem(this);return false;">
+                            {% spaceless %}
+                            <i class="fa fa-plus-circle"></i>
+                            Ajouter une rubrique
+                            {% endspaceless %}
+                        </a>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        {{ form_errors(form) }}
+
+        {# Add this line to set the widget as rendered to not display it twice in form_rest #}
+        {% do form.items.setRendered %}
+
+        <div class="vic-menuWidget-rest">
+            {{ form_rest(form) }}
+        </div>
+
         {{ form_end(form) }}
     </div>
 </div>
@@ -40,7 +59,7 @@
         //for the existing menus, we generate the js menus
         initMenus();
 
-        $vic(".vic-menuWidget-itemList").sortable({
+        $vic(".vic-menuform-list").sortable({
             items: "> li",
             placeholder: "vic-ui-state-highlight",
             update: function (event, ui)
@@ -61,52 +80,76 @@
         });
     });
 </script>
-
 {% endblock body %}
 
+
+
 {% macro widget_prototype(form, index) %}
-<li class='vic-form-group vic-menuWidget-item-formGroup' role="menu" data-index="{{ index is not null ? index : '__menu_index__' }}" data-menu="__menu_id__" data-init="false">
+<li class="vic-menuform-listitem vic-clearfix" role="menu" data-index="{{ index is not null ? index : '__menu_index__' }}" data-menu="__menu_id__" data-init="false">
     {{ _self.link_render_form(form) }}
 
-    <ul class="vic-menuWidget-itemList" role="menu-container">
+    <ul class="vic-menuform-list -sublist vic-clearfix" role="menu-container">
         {% if form.items is defined %}
             {% for item in form.items %}
-                {{ _self.widget_prototype(item, loop.index0) }}
+            {{ _self.widget_prototype(item, loop.index0) }}
             {% endfor %}
         {% endif %}
     </ul>
-    <div class='add_menu_link-container'>
-        <span><a href="#" onclick="addRow(this);return false;" class="vic-btn vic-menuWidget-btn vic-btn-default add_menu_link"></a></span>
-    </div>
+
     {{ form_rest(form) }}
 </li>
-
-
 {% endmacro %}
 
 
+
 {% macro link_render_form(form) %}
+    <div class="vic-menuform-listitemform vic-clearfix">
+        {% spaceless %}
+        <div class="vic-menuform-moveicon">
+            <img src="{{ asset('bundles/victoirecore/images/move_cross.png') }}" height="20">
+        </div>
 
-    {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
-    {{ form_widget(form.link.linkType, {'attr': {'class': 'vic-menuWidget-formControl victoire-linkType'}}) }}
+        <div>
+            {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': '-menuform' }}) }}
+        </div>
 
-    <span class="page-type vic-hidden">
-        {{ form_widget(form.link.page, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
-    </span>
-    <span class="url-type vic-hidden">
-        {{ form_widget(form.link.url, {'attr': {'placeholder': form.link.url.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
-    </span>
-    <span class="route-type vic-hidden">
-        {{ form_widget(form.link.route, {'attr': {'placeholder': form.link.route.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
-        {{ form_widget(form.link.route_parameters, {'attr': {'placeholder': form.link.route_parameters.vars.label, 'class': 'vic-menuWidget-formControl'}}) }}
-    </span>
-    <span class="attachedWidget-type vic-hidden">
-        {{ form_widget(form.link.attachedWidget, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
-    </span>
-    <span>
-        {{ form_widget(form.link.target, {'attr': {'class': 'vic-menuWidget-formControl'}}) }}
-    </span>
-    <span>
-        <a onclick="deleteRow(this);return false;" href="#" class="vic-btn vic-btn-danger vic-menuWidget-btn vic-menuWidget-deleteRow vic-btn" ><i class="fa fa-trash-o"></i></a>
-    </span>
+        <div>
+            {{ form_widget(form.link.linkType, {'attr': {'class': '-menuform victoire-linkType' }}) }}
+        </div>
+
+        <div class="page-type vic-hidden">
+            {{ form_widget(form.link.page, {'attr': {'class': '-menuform' }}) }}
+        </div>
+
+        <div class="url-type vic-hidden">
+            {{ form_widget(form.link.url, {'attr': {'placeholder': form.link.url.vars.label, 'class': '-menuform' }}) }}
+        </div>
+
+        <div class="route-type vic-hidden">
+            {{ form_widget(form.link.route, {'attr': {'placeholder': form.link.route.vars.label, 'class': '-menuform' }}) }}
+
+            {{ form_widget(form.link.route_parameters, {'attr': {'placeholder': form.link.route_parameters.vars.label, 'class': '-menuform' }}) }}
+        </div>
+
+        <div class="attachedWidget-type vic-hidden">
+            {{ form_widget(form.link.attachedWidget, {'attr': {'class': '-menuform' }}) }}
+        </div>
+
+        <div>
+            {{ form_widget(form.link.target, {'attr': {'class': '-menuform' }}) }}
+        </div>
+
+        <div>
+            <a href="#" onclick="addRow(this);return false;" class="vic-btn vic-btn-default add_menu_link -square">
+                <i class="fa fa-level-up fa-rotate-90"></i>
+            </a>
+        </div>
+
+        <div>
+            <a onclick="deleteRow(this);return false;" href="#" class="vic-btn vic-btn-danger vic-menuWidget-btn vic-menuWidget-deleteRow -square -framed">
+                <i class="fa fa-trash-o"></i>
+            </a>
+        </div>
+        {% endspaceless %}
+    </div>
 {% endmacro %}

@@ -32,7 +32,7 @@ function Menu(menuElement)
 
 function addRootItem(el)
 {
-    var menuElement = $vic(el).parents('div').first().prev('ul');
+    var menuElement = $vic(el).parents('.vic-add_menu_sibling-Container').first().prev('ul');
     // var parentMenu = $vic('#menu-items');
     var menu = new Menu(menuElement);
     menu.init();
@@ -40,7 +40,7 @@ function addRootItem(el)
 }
 function addRow(el)
 {
-    var menuElement = $vic(el).parents('div').first().prev('ul');
+    var menuElement = $vic(el).parents('.vic-menuform-listitemform').first().siblings('ul');
     // var parentMenu = $vic(el).parents('[role="menu-item"]').first();
     var menu = new Menu(menuElement);
     menu.init();
