@@ -10,16 +10,16 @@
         </li>
     {% elseif childrenLayout == "panel" %}
         <li>
-            {{ vic_link(menuItem.linkParameters, menuItem.title) }}
+            {{ vic_link(menuItem.link.parameters, menuItem.title) }}
             <div class="submenu-slider">
                 <div class="submenu-slider-container">
                     <div class="span3 column">
                         {% for level2item in menuItem.children %}
-                            {{ vic_link(level2item.linkParameters, level2item.title) }}
+                            {{ vic_link(level2item.link.parameters, level2item.title) }}
                             <ul>
                                 {% for level3item in level2item.children %}
                                     <li>
-                                        {{ vic_link(level3item.linkParameters, level3item.title) }}
+                                        {{ vic_link(level3item.link.parameters, level3item.title) }}
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -30,7 +30,7 @@
         </li>
     {% endif %}
 {% else %}
-    <li>{{ vic_link(menuItem.linkParameters, menuItem.title) }}</li>
+    <li>{{ vic_link(menuItem.link.parameters, menuItem.title) }}</li>
 {% endif %}
 
 {% macro render_dropdown_link(item, depth) %}
