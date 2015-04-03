@@ -1,0 +1,7 @@
+{% extends 'VictoireWidgetMenuBundle::show.html.twig' %}
+
+{% block content_items %}
+{% for child in widget.children %}
+    {% include 'VictoireWidgetMenuBundle::showItemPanel.html.twig' with { 'menuItem': child, 'depth': 0 } %}
+{% endfor %}
+{% endblock content_items %}

@@ -6,9 +6,11 @@
             <div class="container-fluid">
                 <div class="nav-collapse">
                     <ul class="nav">
+                        {% block content_items %}
                         {% for child in widget.children %}
-                            {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child, 'childrenLayout': widget.childrenLayout, 'depth': 0 } %}
+                            {% include 'VictoireWidgetMenuBundle::showItem.html.twig' with { 'menuItem': child, 'depth': 0 } %}
                         {% endfor %}
+                        {% endblock content_items %}
                     </ul>
                 </div>
             </div>

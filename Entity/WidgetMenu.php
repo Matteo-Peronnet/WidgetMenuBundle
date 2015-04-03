@@ -36,13 +36,6 @@ class WidgetMenu extends Widget
     protected $children;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="children_layout", type="string", length=255)
-     */
-    protected $childrenLayout = "dropdown";
-
-    /**
      * To String function
      * Used in render choices type (Especially VictoireWidgetRenderBundle)
      *
@@ -150,28 +143,5 @@ class WidgetMenu extends Widget
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Get childrenLayout
-     *
-     * @return string
-     */
-    public function getChildrenLayout()
-    {
-        return $this->childrenLayout;
-    }
-
-    /**
-     * Set childrenLayout
-     * @param string $childrenLayout
-     *
-     * @return $this
-     */
-    public function setChildrenLayout($childrenLayout)
-    {
-        $this->childrenLayout = $childrenLayout;
-
-        return $this;
     }
 }

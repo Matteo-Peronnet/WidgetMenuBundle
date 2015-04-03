@@ -25,20 +25,7 @@ class WidgetMenuType extends WidgetType
                 array(
                     'label'     => 'menu.form.name.label',
                     'required'  => true,
-                    'vic_help_label_tooltip' => array('menu.form.name.help_label_tooltip')
-                )
-            )
-            ->add(
-                'childrenLayout',
-                'choice',
-                array(
-                    'label'     => 'menu.form.childrenLayout.label',
-                    'choices'   => array(
-                        'rollover' => 'menu.form.childrenLayout.choices.rollover.label',
-                        'panel'    => 'menu.form.childrenLayout.choices.panel.label'
-                    ),
-                    'required'  => true,
-                    'vic_help_label_tooltip' => array('menu.form.childrenLayout.help_label_tooltip')
+                    'vic_help_label_tooltip' => array('menu.form.name.help_label_tooltip'),
                 )
             )
             ->add(
@@ -50,7 +37,7 @@ class WidgetMenuType extends WidgetType
                     'options'       => array(
                         'namespace'  => null,
                         'entityName' => null,
-                        'mode'       => "static"
+                        'mode'       => "static",
                     ),
                     'required'      => false,
                     'allow_add'     => true,
@@ -75,7 +62,7 @@ class WidgetMenuType extends WidgetType
             array(
                 'data_class'         => 'Victoire\Widget\MenuBundle\Entity\WidgetMenu',
                 'widget'             => 'menu',
-                'translation_domain' => 'victoire'
+                'translation_domain' => 'victoire',
             )
         );
     }

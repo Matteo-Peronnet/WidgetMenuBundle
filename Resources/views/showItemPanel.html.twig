@@ -1,0 +1,26 @@
+{% extends 'VictoireWidgetMenuBundle::showItem.html.twig' %}
+{% block content_items_item %}
+{% if menuItem.children|length > 0 %}
+    <li>
+        {{ vic_link(menuItem.link.parameters, menuItem.title) }}
+        <div class="submenu-slider">
+            <div class="submenu-slider-container">
+                <div class="span3 column">
+                    {% for level2item in menuItem.children %}
+                        {{ vic_link(level2item.link.parameters, level2item.title) }}
+                        <ul>
+                            {% for level3item in level2item.children %}
+                                <li>
+                                    {{ vic_link(level3item.link.parameters, level3item.title) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </li>
+{% else %}
+    <li>{{ vic_link(menuItem.link.parameters, menuItem.title) }}</li>
+{% endif %}
+{% endblock content_items_item %}
