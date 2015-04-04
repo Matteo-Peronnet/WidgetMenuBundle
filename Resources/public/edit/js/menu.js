@@ -87,9 +87,6 @@ function initMenus()
             menus[menu.id] = menu;
         }
     });
-
-
-    showSelectedLinkType($vic('.victoire-linkType'));
 }
 
 Menu.prototype.init = function ()
