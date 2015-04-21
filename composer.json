@@ -1,5 +1,5 @@
 {
-    "name": "appventus/menu-widget",
+    "name": "friendsofvictoire/menu-widget",
     "type": "symfony-bundle",
     "description": "Victoire Cms Menu component",
     "keywords": ["cms", "victoire", "menu"],
