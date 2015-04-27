@@ -9,17 +9,11 @@
             </ul>
     </li>
 {% else %}
-    <li>{{ vic_link(menuItem.link.parameters, menuItem.title) }}</li>
+    {{ vic_menu_link(menuItem.link.parameters, menuItem.title) }}
 {% endif %}
 {% endblock content_items_item %}
 
 {% macro render_dropdown_link(item, depth) %}
-	{% if item.linkType != 'page' %}
-	    <a href="{{item.url}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>
-    {% endif %}</a>
-	{% else %}
-	    <a href="{{ path('victoire_core_page_show', {'url' : item.page.url }) }}">{{item.title}} {% if depth == 0 %}<b class="caret"></b></a>
-	{% endif %}
-	{% endif %}
+	    <a href="{{vic_link(item.link.parameters)}}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
 {% endmacro %}
 
