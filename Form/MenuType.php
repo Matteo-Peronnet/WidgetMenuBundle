@@ -83,11 +83,11 @@ class MenuType extends WidgetListingItemType
         $form->add('items', 'collection',
             array(
                 'property_path' => 'children',
-                'type' => 'victoire_form_menu',
-                'required'     => false,
-                'allow_add'    => true,
-                'allow_delete' => true,
-                'by_reference' => false
+                'type'          => 'victoire_form_menu',
+                'required'      => false,
+                'allow_add'     => true,
+                'allow_delete'  => true,
+                'by_reference'  => false
             )
         );
     }
@@ -103,9 +103,8 @@ class MenuType extends WidgetListingItemType
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
             'cascade_validation' => true,
             'translation_domain' => 'victoire',
-            'namespace' => null,
-            'entityName' => null,
-
+            'namespace'          => null,
+            'businessEntityId'   => null,
         ));
     }
 

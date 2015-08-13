@@ -34,16 +34,16 @@ class WidgetMenuType extends WidgetType
                 array(
                     'property_path' => 'children',
                     'type'          => 'victoire_form_menu',
-                    'options'       => array(
-                        'namespace'  => null,
-                        'entityName' => null,
-                        'mode'       => "static",
-                    ),
                     'required'      => false,
                     'allow_add'     => true,
                     'allow_delete'  => true,
                     'by_reference'  => false,
                     'prototype'     => true,
+                    'options'       => array(
+                        'namespace'        => null,
+                        'businessEntityId' => null,
+                        'mode'             => "static",
+                    ),
                 )
             );
 
