@@ -4,9 +4,12 @@
 function Menu(menuElement)
 {
     this.element = $vic(menuElement);
-    this.index = $vic(menuElement).children('[data-init="true"]').length;
-
-
+    if ($vic(menuElement).data('index')) {
+        this.index = $vic(menuElement).data('index');
+    } else {
+        this.index = $vic(menuElement).children('[data-init="true"]').length;
+    }
+    
     var lastMaxId = 0;
     $vic('[data-init=true]').each(function(index, el) {
 
