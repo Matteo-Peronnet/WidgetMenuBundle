@@ -54,26 +54,6 @@
 
         //for the existing menus, we generate the js menus
         initMenus();
-
-        $vic(".vic-menuform-list").sortable({
-            items: "> li",
-            placeholder: "vic-ui-state-highlight",
-            update: function (event, ui)
-            {
-                pos = 0;
-                $vic(this).children().each(function (){
-                    $vic('[data-type="position"]', this).val(++pos);
-                });
-            },
-            create: function (event, ui)
-            {
-                pos = 0;
-                $vic(this).children().each(function ()
-                {
-                    $vic('[data-type="position"]', this).val(++pos);
-                });
-            }
-        });
     });
 </script>
 {% endblock body %}
@@ -101,38 +81,12 @@
 {% macro link_render_form(form) %}
     <div class="vic-menuform-listitemform vic-clearfix">
         {% spaceless %}
-        <div class="vic-menuform-moveicon">
-            <img src="{{ asset('bundles/victoirecore/images/move_cross.png') }}" height="20">
-        </div>
-
         <div>
             {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': '-menuform' }}) }}
         </div>
 
-        <div>
-            {{ form_widget(form.link.linkType, {'attr': {'class': '-menuform victoire-linkType' }}) }}
-        </div>
-
-        <div class="viewReference-type vic-hidden">
-            {{ form_widget(form.link.viewReference, {'attr': {'class': '-menuform' }}) }}
-        </div>
-
-        <div class="url-type vic-hidden">
-            {{ form_widget(form.link.url, {'attr': {'placeholder': form.link.url.vars.label, 'class': '-menuform' }}) }}
-        </div>
-
-        <div class="route-type vic-hidden">
-            {{ form_widget(form.link.route, {'attr': {'placeholder': form.link.route.vars.label, 'class': '-menuform' }}) }}
-
-            {{ form_widget(form.link.route_parameters, {'attr': {'placeholder': form.link.route_parameters.vars.label, 'class': '-menuform' }}) }}
-        </div>
-
-        <div class="attachedWidget-type vic-hidden">
-            {{ form_widget(form.link.attachedWidget, {'attr': {'class': '-menuform' }}) }}
-        </div>
-
-        <div>
-            {{ form_widget(form.link.target, {'attr': {'class': '-menuform' }}) }}
+        <div class="-menuform linkForm">
+            {{ form_widget(form.link) }}
         </div>
 
         <div>
