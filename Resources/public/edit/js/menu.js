@@ -44,7 +44,6 @@ function addRootItem(el)
 function addRow(el)
 {
     var menuElement = $vic(el).parents('.vic-menuform-listitemform').first().siblings('ul');
-    // var parentMenu = $vic(el).parents('[role="menu-item"]').first();
     var menu = new Menu(menuElement);
     menu.init();
     menu.append();
@@ -121,11 +120,10 @@ Menu.prototype.update = function ()
     $vic(this.element).attr('data-menu', this.id);
     $vic(this.element).attr('data-init', "true");
 
-    showSelectedLinkType($vic(this.element).find('.victoire-linkType'));
+    showSelectedLinkType($vic(this.element).find("[data-role='vic-linkType-select']"));
 };
 Menu.prototype.append = function ()
 {
     $vic('[data-menu="' + this.parentId + '"]').children('[role="menu-container"]').first().append(this.newForm);
-    showSelectedLinkType($vic(this.newForm).find('.victoire-linkType'));
+    showSelectedLinkType($vic(this.newForm).find("[data-role='vic-linkType-select']"));
 };
-
