@@ -26,7 +26,9 @@ class MenuType extends WidgetListingItemType
                 'required' => true,
                 )
             )
-            ->add('link', 'victoire_link')
+            ->add('link', 'victoire_link', array(
+                'horizontal' => true,
+            ))
             ->remove('removeButton');
 
         /*
