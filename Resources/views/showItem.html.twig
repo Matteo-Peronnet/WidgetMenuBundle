@@ -14,5 +14,6 @@
 {% endblock content_items_item %}
 
 {% macro render_dropdown_link(item, depth) %}
-	    <a href="{{ vic_link_url(item.link.parameters) }}">{{item.title}} {% if depth == 0 %}<b class="caret"></b>{% endif %}</a>
+    {% set label = item.title ~ (depth == 0 ? ' <b class="caret"></b>' : "") %}
+    {{ vic_link(item.link.parameters, label) }}
 {% endmacro %}
