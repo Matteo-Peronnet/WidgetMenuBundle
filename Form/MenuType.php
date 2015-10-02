@@ -22,7 +22,7 @@ class MenuType extends WidgetListingItemType
         parent::buildForm($builder, $options);
         $builder
             ->add('title', 'text', array(
-                'label'    => 'menu.form.title.label',
+                'label'    => array('novalidate' => 'novalidate', 'placeholder' => 'menu.form.category.placholder'),
                 'required' => true,
                 )
             )
