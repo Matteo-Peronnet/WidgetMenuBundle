@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,23 +8,23 @@
     <body>
       <trans-unit id="45a878a54ff38689d87488acccad61b76adf139d" resname="widget.menu.add_category.label">
         <source>widget.menu.add_category.label</source>
-        <target state="new">Ajouter une catégorie</target>
+        <target state="new">Add a rubric</target>
       </trans-unit>
       <trans-unit id="77132be5838a3654cf994757d61fbf4edce18af2" resname="menu.form.name.label">
         <source>menu.form.name.label</source>
-        <target>Nom du menu</target>
+        <target>Navigation menu name</target>
       </trans-unit>
       <trans-unit id="d86b36f9743d6a6846ca030e5344cd5ab0c53351" resname="menu.form.category.placholder">
         <source>menu.form.category.placholder</source>
-        <target>Nom de la rubrique</target>
+        <target>Rubric's name</target>
       </trans-unit>
       <trans-unit id="c6f3907cb042d459f6602858d6c2b02112fbab53" resname="modal.form.widget.type.menu.label">
         <source>modal.form.widget.type.menu.label</source>
-        <target>Widget Menu de navigation</target>
+        <target>Navigation menu Widget</target>
       </trans-unit>
       <trans-unit id="e46f10823c7ac394d59b10bdd340b281985f1b5f" resname="widget.menu.new.action.label">
         <source>widget.menu.new.action.label</source>
-        <target>Menu de navigation</target>
+        <target>Navigation menu</target>
       </trans-unit>
     </body>
   </file>
