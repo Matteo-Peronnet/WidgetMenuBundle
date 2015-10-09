@@ -1,13 +1,27 @@
-Victoire Menu Bundle
+#Victoire DCMS Menu Bundle
 ============
 
-Need to add a menu in a victoire website ?
-Get this listing bundle and so on
+This bundle installs the Menu Widget on your Victoire project.
+With this widget, you can install a header menu, footer menu, or a menu directly on a page.
 
-First you need to have a valid Symfony2 Victoire edition.
-Then you just have to run the following composer command :
+The categories can link to :
+
+* Internal pages
+* URL
+* A routing setting
+* An anchor - i.e a widget within a page
+
+##Set Up Victoire
+
+If you haven't already, you can follow the steps to set up Victoire *[here](https://github.com/Victoire/victoire/blob/master/setup.md)*
+
+##Install the Menu Bundle :
+
+Run the following composer command :
 
     php composer.phar require friendsofvictoire/menu-widget
+
+###Reminder
 
 Do not forget to add the bundle in your AppKernel !
 
@@ -25,6 +39,7 @@ Do not forget to add the bundle in your AppKernel !
         }
     }
 ```
+##Tricks
 
 You can then use this widget menu in any web site. To get a full responsive menu, you can add these lines in your layout :
 
