@@ -54,6 +54,30 @@
 
         //for the existing menus, we generate the js menus
         initMenus();
+
+        $vic(".vic-menuform-list").sortable({
+            items: "> li",
+            placeholder: "vic-ui-state-highlight",
+            update: function (event, ui)
+            {
+                pos = 0;
+                $vic(this).children().each(function (){
+                    $vic('[data-type="position"]', this).val(++pos);
+                });
+            },
+            create: function (event, ui)
+            {
+                pos = 0;
+                $vic(this).children().each(function ()
+                {
+                    $vic('[data-type="position"]', this).val(++pos);
+                });
+            }
+        });
+
+        $(document).on('submit', 'form[name="_static_victoire_widget_form_menu"]', function() {
+            var sorted = $vic($('.vic-menuform-list')).nestedSortable("toArray");
+        })
     });
 </script>
 {% endblock body %}
@@ -81,6 +105,9 @@
 {% macro link_render_form(form) %}
     <div class="vic-menuform-listitemform vic-clearfix">
         {% spaceless %}
+        <div class="vic-menuform-moveicon">
+            <img src="{{ asset('bundles/victoirecore/images/move_cross.png') }}" height="20">
+        </div>
         <div>
             {{ form_widget(form.title, {'attr': {'placeholder': form.title.vars.label, 'class': '-menuform' }}) }}
         </div>

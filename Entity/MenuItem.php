@@ -12,10 +12,9 @@ use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
  * MenuItem
  *
  * @ORM\Table("vic_widget_menu_item")
- * @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
- * @Gedmo\Tree(type="nested")
+ * @ORM\Entity()
  */
-class MenuItem extends WidgetListingItem implements NodeInterface
+class MenuItem extends WidgetListingItem
 {
     use \Victoire\Bundle\WidgetBundle\Entity\Traits\LinkTrait;
 
@@ -46,32 +45,8 @@ class MenuItem extends WidgetListingItem implements NodeInterface
      */
     protected $widgetMenu;
 
-    /**
-     * @Gedmo\TreeLeft
-     * @ORM\Column(name="lft", type="integer")
-     */
-    protected $lft;
 
     /**
-     * @Gedmo\TreeLevel
-     * @ORM\Column(name="lvl", type="integer")
-     */
-    protected $lvl;
-
-    /**
-     * @Gedmo\TreeRight
-     * @ORM\Column(name="rgt", type="integer")
-     */
-    protected $rgt;
-
-    /**
-     * @Gedmo\TreeRoot
-     * @ORM\Column(name="root", type="integer", nullable=true)
-     */
-    protected $root;
-
-    /**
-     * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="cascade")
      */
@@ -79,7 +54,7 @@ class MenuItem extends WidgetListingItem implements NodeInterface
 
     /**
      * @ORM\OneToMany(targetEntity="MenuItem", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"lft" = "ASC"})
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $children;
 
@@ -171,98 +146,6 @@ class MenuItem extends WidgetListingItem implements NodeInterface
     public function getMenu()
     {
         return $this->menu;
-    }
-
-    /**
-     * Set lft
-     * @param integer $lft
-     *
-     * @return Menu
-     */
-    public function setLft($lft)
-    {
-        $this->lft = $lft;
-
-        return $this;
-    }
-
-    /**
-     * Get lft
-     *
-     * @return integer
-     */
-    public function getLft()
-    {
-        return $this->lft;
-    }
-
-    /**
-     * Set lvl
-     * @param integer $lvl
-     *
-     * @return Menu
-     */
-    public function setLvl($lvl)
-    {
-        $this->lvl = $lvl;
-
-        return $this;
-    }
-
-    /**
-     * Get lvl
-     *
-     * @return integer
-     */
-    public function getLvl()
-    {
-        return $this->lvl;
-    }
-
-    /**
-     * Set rgt
-     * @param integer $rgt
-     *
-     * @return Menu
-     */
-    public function setRgt($rgt)
-    {
-        $this->rgt = $rgt;
-
-        return $this;
-    }
-
-    /**
-     * Get rgt
-     *
-     * @return integer
-     */
-    public function getRgt()
-    {
-        return $this->rgt;
-    }
-
-    /**
-     * Set root
-     * @param integer $root
-     *
-     * @return Menu
-     */
-    public function setRoot($root)
-    {
-        $this->root = $root;
-
-        return $this;
-    }
-
-    /**
-     * Get root
-     *
-     * @return integer
-     */
-    public function getRoot()
-    {
-        return $this->root;
     }
 
     /**
