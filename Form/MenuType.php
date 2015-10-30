@@ -22,7 +22,10 @@ class MenuType extends WidgetListingItemType
         parent::buildForm($builder, $options);
         $builder
             ->add('title', 'text', array(
-                'label'    => array('novalidate' => 'novalidate', 'placeholder' => 'menu.form.category.placholder'),
+                'label'    => 'menu.form.category.placeholder',
+                'attr' => [
+                    'novalidate' => 'novalidate',
+                ],
                 'required' => true,
                 )
             )
@@ -61,13 +64,7 @@ class MenuType extends WidgetListingItemType
                 $rawData = $event->getData();
 
                 if (isset($rawData['items'])) {
-                    $addChildren = true;
-                } else {
-                    $addChildren = false;
-                }
 
-                //did some children was added in the form
-                if ($addChildren) {
                     $form = $event->getForm();
                     $this->addChildrenField($form);
                 }

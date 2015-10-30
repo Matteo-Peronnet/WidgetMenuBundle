@@ -14,8 +14,8 @@
         <source>menu.form.name.label</source>
         <target>Nombre del menú de navegación</target>
       </trans-unit>
-      <trans-unit id="d86b36f9743d6a6846ca030e5344cd5ab0c53351" resname="menu.form.category.placholder">
-        <source>menu.form.category.placholder</source>
+      <trans-unit id="d86b36f9743d6a6846ca030e5344cd5ab0c53351" resname="menu.form.category.placeholder">
+        <source>menu.form.category.placeholder</source>
         <target>Nombre de la rúbrica</target>
       </trans-unit>
       <trans-unit id="c6f3907cb042d459f6602858d6c2b02112fbab53" resname="modal.form.widget.type.menu.label">
