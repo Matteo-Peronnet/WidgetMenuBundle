@@ -8,12 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
 
 /**
- * Menu form type
+ * Menu form type.
  */
 class MenuType extends WidgetListingItemType
 {
     /**
-     * define form fields
+     * define form fields.
+     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -21,17 +22,17 @@ class MenuType extends WidgetListingItemType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('title', 'text', array(
+            ->add('title', 'text', [
                 'label'    => 'menu.form.category.placeholder',
-                'attr' => [
+                'attr'     => [
                     'novalidate' => 'novalidate',
                 ],
                 'required' => true,
-                )
+                ]
             )
-            ->add('link', 'victoire_link', array(
+            ->add('link', 'victoire_link', [
                 'horizontal' => true,
-            ))
+            ])
             ->remove('removeButton');
 
         /*
@@ -64,7 +65,6 @@ class MenuType extends WidgetListingItemType
                 $rawData = $event->getData();
 
                 if (isset($rawData['items'])) {
-
                     $form = $event->getForm();
                     $this->addChildrenField($form);
                 }
@@ -73,42 +73,44 @@ class MenuType extends WidgetListingItemType
     }
 
     /**
-     * Add the items field to the form
+     * Add the items field to the form.
      *
      * @param Form $form
      */
     protected function addChildrenField($form)
     {
         $form->add('items', 'collection',
-            array(
+            [
                 'property_path' => 'children',
                 'type'          => 'victoire_form_menu',
                 'required'      => false,
                 'allow_add'     => true,
                 'allow_delete'  => true,
-                'by_reference'  => false
-            )
+                'by_reference'  => false,
+            ]
         );
     }
+
     /**
-     * bind form to WidgetRedactor entity
+     * bind form to WidgetRedactor entity.
+     *
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         parent::setDefaultOptions($resolver);
 
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
             'cascade_validation' => true,
             'translation_domain' => 'victoire',
             'namespace'          => null,
             'businessEntityId'   => null,
-        ));
+        ]);
     }
 
     /**
-     * get form name
+     * get form name.
      *
      * @return string The name of the form
      */

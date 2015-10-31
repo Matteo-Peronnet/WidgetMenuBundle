@@ -3,11 +3,11 @@
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Victoire\Bundle\WidgetBundle\Entity\Widget;
 
 /**
- * WidgetMenu
+ * WidgetMenu.
  *
  * @ORM\Table("vic_widget_menu")
  * @ORM\Entity
@@ -37,9 +37,9 @@ class WidgetMenu extends Widget
 
     /**
      * To String function
-     * Used in render choices type (Especially VictoireWidgetRenderBundle)
+     * Used in render choices type (Especially VictoireWidgetRenderBundle).
      *
-     * @return String
+     * @return string
      */
     public function __toString()
     {
@@ -47,7 +47,8 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Add child
+     * Add child.
+     *
      * @param string $child
      *
      * @return MenuItem
@@ -61,7 +62,8 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Remove child
+     * Remove child.
+     *
      * @param string $child
      *
      * @return MenuItem
@@ -74,7 +76,8 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Set children
+     * Set children.
+     *
      * @param string $children
      *
      * @return MenuItem
@@ -90,7 +93,7 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Get children
+     * Get children.
      *
      * @return string
      */
@@ -100,7 +103,8 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Set name
+     * Set name.
+     *
      * @param string $name
      *
      * @return MenuItem
@@ -113,7 +117,7 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -123,7 +127,8 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Set slug
+     * Set slug.
+     *
      * @param string $slug
      *
      * @return MenuItem
@@ -136,7 +141,7 @@ class WidgetMenu extends Widget
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */

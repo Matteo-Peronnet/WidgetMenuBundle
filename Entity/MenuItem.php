@@ -1,15 +1,15 @@
 <?php
+
 namespace Victoire\Widget\MenuBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Knp\Menu\NodeInterface;
+use Gedmo\Mapping\Annotation as Gedmo
 use Victoire\Bundle\PageBundle\Entity\Page;
 use Victoire\Bundle\WidgetBundle\Entity\Widget;
 use Victoire\Widget\ListingBundle\Entity\WidgetListingItem;
 
 /**
- * MenuItem
+ * MenuItem.
  *
  * @ORM\Table("vic_widget_menu_item")
  * @ORM\Entity()
@@ -24,7 +24,7 @@ class MenuItem extends WidgetListingItem
     const MENU_NO = 4;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -45,7 +45,6 @@ class MenuItem extends WidgetListingItem
      */
     protected $widgetMenu;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="MenuItem", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="cascade")
@@ -59,7 +58,7 @@ class MenuItem extends WidgetListingItem
     protected $children;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\ManyToOne(targetEntity="Victoire\Bundle\PageBundle\Entity\Page")
      * @ORM\JoinColumn(name="root_hierarchy_page", referencedColumnName="id", onDelete="cascade", nullable=true)
@@ -67,25 +66,25 @@ class MenuItem extends WidgetListingItem
     protected $rootHierarchyPage;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="menu_type", type="integer")
      */
     protected $menuType;
 
     /**
-     * construct
+     * construct.
      **/
     public function __construct()
     {
         $this->menuType = self::MENU_MANUAL;
-        $this->children = array();
+        $this->children = [];
     }
 
     /**
-     * Set id
+     * Set id.
      *
-     * @param integer
+     * @param int
      */
     public function setId($id)
     {
@@ -93,9 +92,9 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -103,7 +102,8 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Set title
+     * Set title.
+     *
      * @param string $title
      *
      * @return MenuItem
@@ -116,7 +116,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -126,7 +126,8 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Set menu
+     * Set menu.
+     *
      * @param string $menu
      *
      * @return Menu
@@ -139,7 +140,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get menu
+     * Get menu.
      *
      * @return string
      */
@@ -149,7 +150,8 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Set parent
+     * Set parent.
+     *
      * @param Menu $parent
      *
      * @return Menu
@@ -162,7 +164,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get parent
+     * Get parent.
      *
      * @return Menu
      */
@@ -172,7 +174,8 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Add child
+     * Add child.
+     *
      * @param Menu $child
      *
      * @return Menu
@@ -186,7 +189,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Remove children
+     * Remove children.
      *
      * @param Menu $child
      */
@@ -196,7 +199,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Remove children
+     * Remove children.
      *
      * @param Menu $child
      */
@@ -204,8 +207,10 @@ class MenuItem extends WidgetListingItem
     {
         $this->children->removeElement($child);
     }
+
     /**
-     * Set children
+     * Set children.
+     *
      * @param array $children
      *
      * @return \Victoire\Widget\MenuBundle\Entity\MenuItem
@@ -218,7 +223,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get children
+     * Get children.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -228,28 +233,29 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get the name
+     * Get the name.
      *
      * @return string
      */
     public function getName()
     {
-        return "menu";
+        return 'menu';
     }
 
     /**
-     * Get the options
+     * Get the options.
      *
      * @return array
      */
     public function getOptions()
     {
-        return array();
+        return [];
     }
 
     /**
-     * Set rot page for hierarchy behavior
-     * @param integer $rootHierarchyPage
+     * Set root page for hierarchy behavior.
+     *
+     * @param int $rootHierarchyPage
      *
      * @return Menu
      */
@@ -261,9 +267,9 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get menu menu rootHierarchyPage
+     * Get menu menu rootHierarchyPage.
      *
-     * @return integer
+     * @return int
      */
     public function getRootHierarchyPage()
     {
@@ -271,8 +277,9 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Set menu type
-     * @param integer $menuType
+     * Set menu type.
+     *
+     * @param int $menuType
      *
      * @return Menu
      */
@@ -284,9 +291,9 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get with menu
+     * Get with menu.
      *
-     * @return integer
+     * @return int
      */
     public function getMenuType()
     {
@@ -294,8 +301,9 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Set widget menu
-     * @param integer $widgetMenu
+     * Set widget menu.
+     *
+     * @param int $widgetMenu
      *
      * @return Menu
      */
@@ -307,9 +315,9 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * Get with menu
+     * Get with menu.
      *
-     * @return integer
+     * @return int
      */
     public function getWidgetMenu()
     {
@@ -317,7 +325,7 @@ class MenuItem extends WidgetListingItem
     }
 
     /**
-     * The to string method
+     * The to string method.
      *
      * @return string
      */

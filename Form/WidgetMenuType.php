@@ -7,12 +7,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Victoire\Bundle\CoreBundle\Form\WidgetType;
 
 /**
- * WidgetMenu form type
+ * WidgetMenu form type.
  */
 class WidgetMenuType extends WidgetType
 {
     /**
-     * define form fields
+     * define form fields.
+     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -22,16 +23,16 @@ class WidgetMenuType extends WidgetType
             ->add(
                 'name',
                 null,
-                array(
-                    'label'     => 'menu.form.name.label',
-                    'required'  => true,
-                    'vic_help_label_tooltip' => array('menu.form.name.help_label_tooltip'),
-                )
+                [
+                    'label'                  => 'menu.form.name.label',
+                    'required'               => true,
+                    'vic_help_label_tooltip' => ['menu.form.name.help_label_tooltip'],
+                ]
             )
             ->add(
                 'items',
                 'collection',
-                array(
+                [
                     'property_path' => 'children',
                     'type'          => 'victoire_form_menu',
                     'required'      => false,
@@ -39,19 +40,20 @@ class WidgetMenuType extends WidgetType
                     'allow_delete'  => true,
                     'by_reference'  => false,
                     'prototype'     => true,
-                    'options'       => array(
+                    'options'       => [
                         'namespace'        => null,
                         'businessEntityId' => null,
-                        'mode'             => "static",
-                    ),
-                )
+                        'mode'             => 'static',
+                    ],
+                ]
             );
 
         parent::buildForm($builder, $options);
     }
 
     /**
-     * bind form to WidgetRedactor entity
+     * bind form to WidgetRedactor entity.
+     *
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -59,16 +61,16 @@ class WidgetMenuType extends WidgetType
         parent::setDefaultOptions($resolver);
 
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => 'Victoire\Widget\MenuBundle\Entity\WidgetMenu',
                 'widget'             => 'menu',
                 'translation_domain' => 'victoire',
-            )
+            ]
         );
     }
 
     /**
-     * get form name
+     * get form name.
      *
      * @return string The name of the form
      */
