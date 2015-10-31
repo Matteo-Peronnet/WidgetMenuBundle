@@ -1,7 +1,9 @@
-#Victoire DCMS Menu Bundle
+Victoire DCMS Menu Bundle
 ============
 
-This bundle installs the Menu Widget on your Victoire project.
+##What is the purpose of this bundle
+
+This bundles gives you access to the *Menu Widget*.
 With this widget, you can install a header menu, footer menu, or a menu directly on a page.
 
 The categories can link to :
