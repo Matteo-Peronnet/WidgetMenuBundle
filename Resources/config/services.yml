@@ -7,16 +7,14 @@ services:
     #alias to the entity
     victoire.widget.menu:
         class: Victoire\Widget\MenuBundle\Entity\WidgetMenu
-    #alias to the form
+
     victoire.widget.form.menu:
         class: Victoire\Widget\MenuBundle\Form\WidgetMenuType
         tags:
-            - { name: form.type , alias: victoire_widget_form_menu}
+            - { name: form.type }
 
-
-    #alias to the form
     victoire.form.menu:
         class: Victoire\Widget\MenuBundle\Form\MenuType
         tags:
-            - { name: form.type , alias: victoire_form_menu}
+            - { name: form.type }
 

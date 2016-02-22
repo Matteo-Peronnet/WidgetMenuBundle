@@ -2,9 +2,13 @@
 
 namespace Victoire\Widget\MenuBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Victoire\Bundle\FormBundle\Form\Type\LinkType;
 use Victoire\Widget\ListingBundle\Form\WidgetListingItemType;
 
 /**
@@ -22,7 +26,7 @@ class MenuType extends WidgetListingItemType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('title', 'text', [
+            ->add('title', TextType::class, [
                 'label'    => 'menu.form.category.placeholder',
                 'attr'     => [
                     'novalidate' => 'novalidate',
@@ -30,7 +34,7 @@ class MenuType extends WidgetListingItemType
                 'required' => true,
                 ]
             )
-            ->add('link', 'victoire_link', [
+            ->add('link', LinkType::class, [
                 'horizontal' => true,
             ])
             ->remove('removeButton');
@@ -75,14 +79,13 @@ class MenuType extends WidgetListingItemType
     /**
      * Add the items field to the form.
      *
-     * @param Form $form
+     * @param FormInterface|FormBuilderInterface $form
      */
     protected function addChildrenField($form)
     {
-        $form->add('items', 'collection',
-            [
+        $form->add('items', CollectionType::class, [
                 'property_path' => 'children',
-                'type'          => 'victoire_form_menu',
+                'entry_type'    => self::class,
                 'required'      => false,
                 'allow_add'     => true,
                 'allow_delete'  => true,
@@ -92,30 +95,15 @@ class MenuType extends WidgetListingItemType
     }
 
     /**
-     * bind form to WidgetRedactor entity.
-     *
-     * @param OptionsResolverInterface $resolver
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
-            'cascade_validation' => true,
-            'translation_domain' => 'victoire',
-            'namespace'          => null,
-            'businessEntityId'   => null,
+            'translation_domain' => 'victoire'
         ]);
-    }
-
-    /**
-     * get form name.
-     *
-     * @return string The name of the form
-     */
-    public function getName()
-    {
-        return 'victoire_form_menu';
     }
 }
