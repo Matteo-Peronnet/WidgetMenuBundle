@@ -90,6 +90,11 @@ class MenuType extends WidgetListingItemType
                 'allow_add'     => true,
                 'allow_delete'  => true,
                 'by_reference'  => false,
+                'options'       => [
+                    'namespace'        => null,
+                    'businessEntityId' => null,
+                    'mode'             => 'static',
+                ],
             ]
         );
     }

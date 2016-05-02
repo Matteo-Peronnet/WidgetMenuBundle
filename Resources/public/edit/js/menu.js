@@ -4,12 +4,13 @@
 function Menu(menuElement)
 {
     this.element = $vic(menuElement);
+    this.prototypeHtml = $vic(menuElement).parents('div.menus').attr('data-prototype');
     if ($vic(menuElement).data('index')) {
         this.index = $vic(menuElement).data('index');
     } else {
         this.index = $vic(menuElement).children('[data-init="true"]').length;
     }
-    
+
     var lastMaxId = 0;
     $vic('[data-init=true]').each(function(index, el) {
 
@@ -57,9 +58,9 @@ function deleteRow(el)
 
 }
 
-function initMenus()
+function initMenus(formSelector)
 {
-    var links = $vic('.add_menu_link');
+    var links = $vic(formSelector + ' .add_menu_link');
     var menu = {id: 0};
 
     //we want the links from the bottom to the top
@@ -68,6 +69,7 @@ function initMenus()
         var menuElement = $vic(link).parents('li[role="menu"]').first();
         if (menuElement.length > 0) {
             menu = new Menu(menuElement);
+
             menu.update();
         }
     });
@@ -103,7 +105,7 @@ Menu.prototype.init = function ()
         }
         currentMenu = currentMenu.parent;
     } while (currentMenu != null && i < 10);
-    var newForm = prototype.replace(/\[__name__\]/g, name);
+    var newForm = this.prototypeHtml.replace(/\[__name__\]/g, name);
     var name =  name.replace(/\]\[/g, '_');
     var name =  name.replace(/\]/g, '_');
     var name =  name.replace(/\[/g, '_');
@@ -119,11 +121,8 @@ Menu.prototype.update = function ()
     $vic(this.element).replaceWith(this.element);
     $vic(this.element).attr('data-menu', this.id);
     $vic(this.element).attr('data-init', "true");
-
-    showSelectedLinkType($vic(this.element).find("[data-role='vic-linkType-select']"));
 };
 Menu.prototype.append = function ()
 {
-    $vic('[data-menu="' + this.parentId + '"]').children('[role="menu-container"]').first().append(this.newForm);
-    showSelectedLinkType($vic(this.newForm).find("[data-role='vic-linkType-select']"));
+    $vic('form[name="' + $vic(this.element).parents('form').attr('name')  + '"]').find('[data-menu="' + this.parentId + '"]').first().find('[role="menu-container"]').first().append(this.newForm);
 };

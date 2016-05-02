@@ -50,12 +50,11 @@
 <script type="text/javascript">
     $vic(document).ready(function() {
         menus = new Array();
-        prototype = $vic('div.menus').attr('data-prototype');
 
         //for the existing menus, we generate the js menus
-        initMenus();
+        initMenus('form[name="{{ form.vars.name }}"]');
 
-        $vic(".vic-menuform-list").sortable({
+        $vic('form[name="{{ form.vars.name }}"]  .vic-menuform-list').sortable({
             items: "> li",
             placeholder: "vic-ui-state-highlight",
             update: function (event, ui)
@@ -75,7 +74,7 @@
             }
         });
 
-        $(document).on('submit', 'form[name="_static_victoire_widget_form_menu"]', function() {
+        $(document).on('submit', 'form[name="{{ form.vars.name }}"]', function() {
             var sorted = $vic($('.vic-menuform-list')).nestedSortable("toArray");
         })
     });
