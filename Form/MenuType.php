@@ -108,7 +108,7 @@ class MenuType extends WidgetListingItemType
 
         $resolver->setDefaults([
             'data_class'         => 'Victoire\Widget\MenuBundle\Entity\MenuItem',
-            'translation_domain' => 'victoire'
+            'translation_domain' => 'victoire',
         ]);
     }
 }
