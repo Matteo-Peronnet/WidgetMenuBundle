@@ -3,3 +3,5 @@ victoire_core:
         Menu:
             class: "Victoire\\Widget\\MenuBundle\\Entity\\WidgetMenu"
             name: Menu
+            #disable cache until https://github.com/Victoire/victoire/issues/507 is closed
+            cache: false
