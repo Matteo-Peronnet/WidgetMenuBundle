@@ -35,8 +35,7 @@ class WidgetMenuType extends WidgetType
                     'allow_delete'  => true,
                     'by_reference'  => false,
                     'prototype'     => true,
-                    'options'       => [
-                        'namespace'        => null,
+                    'entry_options'       => [
                         'businessEntityId' => null,
                         'mode'             => 'static',
                     ],
