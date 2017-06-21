@@ -1,11 +1,11 @@
 {% extends 'VictoireCoreBundle:Widget:new.html.twig' %}
-
+{% import _self as macros %}
 {% block body %}
 <div id="widget-{{ slot }}" class="add-widget vic-menuWidget">
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
 
-        <div class="menus" data-prototype="{{ _self.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
+        <div class="menus" data-prototype="{{ macros.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
             {{ form_errors(form) }}
 
             <div class="row" id="vic-menuform-header">
@@ -16,7 +16,7 @@
 
             <ul class="vic-clearfix vic-menuform-list" role="menu-container">
                 {% for item in form.items %}
-                {{ _self.widget_prototype(item, loop.index0) }}
+                {{ macros.widget_prototype(item, loop.index0) }}
                 {% endfor %}
             </ul>
 
@@ -84,13 +84,14 @@
 
 
 {% macro widget_prototype(form, index) %}
+    {% import _self as macros %}
 <li class="vic-menuform-listitem vic-clearfix" role="menu" data-index="{{ index is not null ? index : '__menu_index__' }}" data-menu="__menu_id__" data-init="false">
-    {{ _self.link_render_form(form) }}
+    {{ macros.link_render_form(form) }}
 
     <ul class="vic-menuform-list -sublist vic-clearfix" role="menu-container">
         {% if form.items is defined %}
             {% for item in form.items %}
-            {{ _self.widget_prototype(item, loop.index0) }}
+            {{ macros.widget_prototype(item, loop.index0) }}
             {% endfor %}
         {% endif %}
     </ul>
