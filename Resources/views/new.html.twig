@@ -5,7 +5,7 @@
     <div id="picker-static" class="vic-tab-pane vic-active vic-form-group">
         {{ form_start(form) }}
 
-        <div class="menus" data-prototype="{{ macros.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
+        <div class="menus overflow-hidden" data-prototype="{{ macros.widget_prototype(form.items.vars.prototype)|e }}" role="menu" data-init="true" data-menu="0" data-index="0">
             {{ form_errors(form) }}
 
             <div class="row" id="vic-menuform-header">
